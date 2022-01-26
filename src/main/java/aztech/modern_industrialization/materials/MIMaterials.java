@@ -192,7 +192,6 @@ public class MIMaterials {
         MaterialRegistry
                 .addMaterial(new MaterialBuilder("coke", STONE, GEM, new BakableTargetColoramp(0x6d6d57, common("dust"), miitem("coke")), SOFT)
                         .addParts(DUST).addParts(MIItemPart.of(GEM, "coke")).addParts(BLOCK.of(MaterialBlockSet.COAL))
-
                         .addRecipes(context -> new MIRecipeBuilder(context, MIMachineRecipeTypes.COMPRESSOR, "dust").addTaggedPartInput(DUST, 1).addPartOutput(GEM, 1))
                         .addRecipes(StandardRecipes::apply).build());
 
@@ -203,7 +202,7 @@ public class MIMaterials {
                         .addParts(BARREL.of(32)).addParts(MACHINE_CASING, MACHINE_CASING_PIPE)
                         .addParts(MACHINE_CASING_SPECIAL.of("bronze_plated_bricks"))
                         .addRecipes(ForgeHammerRecipes::apply, SmeltingRecipes::apply, StandardRecipes::apply).build());
-
+        
         MaterialRegistry.addMaterial(
                 new MaterialBuilder("tin", DULL, new BakableTargetColoramp(0xc0bcd0, common("ingot"), template("tin_ingot")), SOFT)
                         .addParts(BOLT, BLADE, RING, ROTOR, ROD, GEAR, CURVED_PLATE, DOUBLE_INGOT, DUST, INGOT, LARGE_PLATE, NUGGET, PLATE, TINY_DUST)

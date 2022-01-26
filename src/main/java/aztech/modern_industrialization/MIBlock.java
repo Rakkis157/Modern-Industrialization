@@ -129,10 +129,10 @@ public class MIBlock extends Block {
     public static final MIBlock HIGHLY_ADVANCED_MACHINE_HULL = new MIBlock("highly_advanced_machine_hull");
     public static final MIBlock QUANTUM_MACHINE_HULL = new MIBlock("quantum_machine_hull", 6000);
 
-    // Multiblock
+//     Multiblock
     public static final MIBlock FUSION_CHAMBER = new MIBlock("fusion_chamber");
 
-    // other
+//     other
     public static final MIBlock INDUSTRIAL_TNT = new MIBlock("industrial_tnt",
             Properties.of(Material.EXPLOSIVE).instabreak().sound(SoundType.GRASS));
 
