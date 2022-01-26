@@ -61,6 +61,17 @@ public final class SingleBlockCraftingMachines {
                 TIER_ELECTRIC, 16
         );
         registerMachineTiers(
+                "bioreactor", MIMachineRecipeTypes.BIOREACTOR, 6,6,3,3,
+                guiParams -> guiParams.backgroundHeight(186),
+                new ProgressBar.Parameters(88, 35, "centrifuge"),
+                new RecipeEfficiencyBar.Parameters(48, 87),
+                new EnergyBar.Parameters(12, 35),
+                items -> items.addSlots(30, 27, 2, 3).addSlots(116, 27, 2, 3),
+                fluids -> fluids.addSlots(30, 67, 1, 3).addSlots(116, 67, 1, 3),
+                true, true, true,
+                TIER_ELECTRIC, 24
+        );
+        registerMachineTiers(
                 "centrifuge", MIMachineRecipeTypes.CENTRIFUGE, 1, 4, 1, 4, guiParams -> {},
                 new ProgressBar.Parameters(65, 33, "centrifuge"), new RecipeEfficiencyBar.Parameters(50, 66), DEFAULT_ENERGY_BAR,
                 items -> items.addSlot(42, 27).addSlots(93, 27, 2, 2), fluids -> fluids.addSlot(42, 45).addSlots(131, 27, 2, 2),

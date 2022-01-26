@@ -64,6 +64,8 @@ public class MIMachineRecipeTypes {
     public static final MachineRecipeType PRESSURIZER = create("pressurizer").withItemInputs().withFluidInputs().withFluidOutputs();
     public static final MachineRecipeType QUARRY = create("quarry").withItemInputs().withItemOutputs();
     public static final MachineRecipeType VACUUM_FREEZER = create("vacuum_freezer").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
+    //MI_Biotech
+    public static final MachineRecipeType BIOREACTOR = create("bioreactor").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
 
 
     // @formatter:on
