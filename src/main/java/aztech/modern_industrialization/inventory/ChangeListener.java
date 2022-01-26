@@ -21,20 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package aztech.modern_industrialization.compat.waila;
+package aztech.modern_industrialization.inventory;
 
-import aztech.modern_industrialization.pipes.impl.PipeBlockEntity;
-import mcp.mobius.waila.api.IRegistrar;
-import mcp.mobius.waila.api.IWailaPlugin;
-import mcp.mobius.waila.api.TooltipPosition;
+import java.util.List;
+import java.util.Map;
 
-public class MIWailaPlugin implements IWailaPlugin {
-    @Override
-    public void register(IRegistrar r) {
-        r.addBlockData(new PipeDataProvider(), PipeBlockEntity.class);
+public abstract class ChangeListener {
 
-        PipeComponentProvider pipeComponentProvider = new PipeComponentProvider();
-        r.addComponent(pipeComponentProvider, TooltipPosition.HEAD, PipeBlockEntity.class);
-        r.addComponent(pipeComponentProvider, TooltipPosition.BODY, PipeBlockEntity.class);
+    protected abstract void onChange();
+
+    protected abstract boolean isValid(Object token); // TODO: do we really need the token? (it's unused for now)
+
+    public void listenAll(List<? extends AbstractConfigurableStack<?, ?>> stacks, Object token) {
+        for (var stack : stacks) {
+            stack.addListener(this, token);
+        }
+    }
+
+    public static void notify(Map<ChangeListener, Object> listeners) {
+        for (var it = listeners.entrySet().iterator(); it.hasNext();) {
+            var entry = it.next();
+            if (entry.getKey().isValid(entry.getValue())) {
+                entry.getKey().onChange();
+            } else {
+                it.remove();
+            }
+        }
     }
 }
