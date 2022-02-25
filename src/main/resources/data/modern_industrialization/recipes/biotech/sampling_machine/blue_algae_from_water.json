@@ -1,0 +1,21 @@
+{
+  "type": "modern_industrialization:sampling_machine",
+  "eu": 2,
+  "duration": 100,
+  "item_inputs": [
+    {
+      "item": "modern_industrialization:test_tube",
+      "amount": 1
+    }
+  ],
+  "fluid_inputs": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 1000
+    }
+  ],
+  "item_outputs": {
+    "item": "modern_industrialization:sample_algae_blue",
+    "amount": 1
+  }
+}

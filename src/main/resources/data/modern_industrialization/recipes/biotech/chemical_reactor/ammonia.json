@@ -1,0 +1,28 @@
+{
+  "type": "modern_industrialization:chemical_reactor",
+  "eu": 8,
+  "duration": 100,
+  "item_inputs" : [
+    {
+      "tag": "c:iron_dusts",
+      "amount": 1,
+      "probability": 0
+    }
+  ],
+  "fluid_inputs" : [
+    {
+      "fluid": "modern_industrialization:hydrogen",
+      "amount": 3000
+    },
+    {
+      "fluid": "modern_industrialization:nitrogen",
+      "amount": 1000
+    }
+  ],
+  "fluid_outputs" : [
+    {
+      "fluid" : "modern_industrialization:ammonia",
+      "amount" : 2000
+    }
+  ]
+}

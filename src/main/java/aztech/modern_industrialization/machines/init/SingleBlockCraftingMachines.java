@@ -52,6 +52,51 @@ import net.fabricmc.loader.api.FabricLoader;
 public final class SingleBlockCraftingMachines {
     public static void init() {
         // @formatter:off
+        //Biotech
+        registerMachineTiers(
+                "aquarium", MIMachineRecipeTypes.AQUARIUM, 4, 2, 2, 2, guiParams -> {},
+                new ProgressBar.Parameters(103, 33, "arrow"), new RecipeEfficiencyBar.Parameters(50, 66), new EnergyBar.Parameters(15, 34),
+                items -> items.addSlots(62, 27, 2, 2).addSlots(129, 27, 2, 1), fluids -> fluids.addSlots(42, 27, 2, 1).addSlots(149, 27, 2, 1),
+                true, false, true,
+                TIER_ELECTRIC, 24
+        );
+        registerMachineTiers(
+                "bioreactor", MIMachineRecipeTypes.BIOREACTOR, 3, 3, 3, 3, guiParams -> {},
+                new ProgressBar.Parameters(88, 35, "centrifuge"), new RecipeEfficiencyBar.Parameters(50, 66), new EnergyBar.Parameters(12, 35),
+                items -> items.addSlots(30, 27, 1, 3).addSlots(116, 27, 1, 3), fluids -> fluids.addSlots(30, 47, 1, 3).addSlots(116, 47, 1, 3),
+                true, true, false,
+                TIER_ELECTRIC, 24
+        );
+        registerMachineTiers(
+                "combustion_chamber", MIMachineRecipeTypes.COMBUSTION_CHAMBER, 4, 2, 2, 2, guiParams -> {},
+                new ProgressBar.Parameters(103, 33, "furnace"), new RecipeEfficiencyBar.Parameters(50, 66), new EnergyBar.Parameters(15, 34),
+                items -> items.addSlots(62, 27, 2, 2).addSlots(129, 27, 2, 1), fluids -> fluids.addSlots(42, 27, 2, 1).addSlots(149, 27, 2, 1),
+                true, false, false,
+                TIER_ELECTRIC, 24
+        );
+        registerMachineTiers(
+                "extractor", MIMachineRecipeTypes.EXTRACTOR, 1, 4, 0, 0, guiParams -> {},
+                new ProgressBar.Parameters(77, 33, "wiremill"), new RecipeEfficiencyBar.Parameters(38, 66), DEFAULT_ENERGY_BAR,
+                items -> items.addSlot(56, 35).addSlots(102, 27, 2, 2), fluids -> {},
+                true, false, false,
+                TIER_ELECTRIC, 16
+        );
+        registerMachineTiers(
+                "filter", MIMachineRecipeTypes.FILTER, 1, 4, 1, 2, guiParams -> {},
+                new ProgressBar.Parameters(77, 33, "macerate"), new RecipeEfficiencyBar.Parameters(38, 66), new EnergyBar.Parameters(8, 34),
+                items -> items.addSlot(36, 47).addSlots(102, 27, 2, 2), fluids -> fluids.addSlot(56, 47).addSlots(142,27, 2, 1),
+                true, false, false,
+                TIER_ELECTRIC, 16
+        );
+        registerMachineTiers(
+                "sampling_machine", MIMachineRecipeTypes.SAMPLING_MACHINE, 2, 1, 1, 0, guiParams -> {},
+                new ProgressBar.Parameters(77, 34, "compress"), new RecipeEfficiencyBar.Parameters(38, 62), new EnergyBar.Parameters(18, 30),
+                items -> items.addSlots(46, 25, 1, 2).addSlot(102, 35), fluids -> fluids.addSlot(46, 45),
+                true, false, false,
+                TIER_ELECTRIC, 1
+        );
+
+        //
         registerMachineTiers(
                 "assembler", MIMachineRecipeTypes.ASSEMBLER, 9, 3, 2, 0,
                 guiParams -> guiParams.backgroundHeight(186),

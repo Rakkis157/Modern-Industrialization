@@ -121,6 +121,10 @@ public class ModernIndustrialization implements ModInitializer {
         setupBlocks();
         MIBlockEntityTypes.init();
         MIFluids.setupFluids();
+        //Init Biotech
+        //MBMachineRecipeTypes.init();
+        //MBSingleBlockCraftingMachines.init();
+
         // fields.
         setupPackets();
         setupFuels();

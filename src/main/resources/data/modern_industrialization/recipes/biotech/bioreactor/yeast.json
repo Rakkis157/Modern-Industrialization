@@ -1,0 +1,35 @@
+{
+  "type": "modern_industrialization:bioreactor",
+  "eu": 4,
+  "duration": 800,
+  "item_inputs": [
+    {
+      "item": "modern_industrialization:sample_yeast",
+      "amount": 1
+    },
+    {
+      "item": "minecraft:sugar",
+      "amount": 4
+    }
+  ],
+  "fluid_inputs": [
+    {
+      "fluid": "modern_industrialization:oxygen",
+      "amount": 2000
+    },
+    {
+      "fluid": "minecraft:water",
+      "amount": 2000
+    }
+  ],
+  "fluid_outputs": [
+    {
+      "fluid": "modern_industrialization:carbon_dioxide",
+      "amount": 2000
+    },
+    {
+      "fluid": "modern_industrialization:yeast_mixture",
+      "amount": 2000
+    }
+  ]
+}

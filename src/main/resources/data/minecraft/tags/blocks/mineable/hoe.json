@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "modern_industrialization:blue_algae_block",
+    "modern_industrialization:brown_algae_block",
+    "modern_industrialization:green_algae_block",
+    "modern_industrialization:red_algae_block",
+    "modern_industrialization:yellow_algae_block"
+  ]
+}

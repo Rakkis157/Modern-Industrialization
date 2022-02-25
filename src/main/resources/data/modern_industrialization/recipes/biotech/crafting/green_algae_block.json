@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "tag": "modern_industrialization:green_algae"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:green_algae_block",
+    "count": 1
+  }
+}

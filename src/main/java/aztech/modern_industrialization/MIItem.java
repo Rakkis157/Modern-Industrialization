@@ -216,4 +216,33 @@ public final class MIItem {
     public static final ForgeTool DIAMOND_HAMMER = new ForgeTool(Tiers.DIAMOND, "diamond_hammer");
     public static final ForgeTool NETHERITE_HAMMER = new ForgeTool(Tiers.NETHERITE, "netherite_hammer");
 
+    //Biotech
+    public static final Item ITEM_CALCITE_DUST = of("calcite_dust");
+    public static final Item ITEM_CALCIUM_CHLORIDE_DUST = of("calcium_chloride_dust");
+    public static final Item ITEM_CALCIUM_NITRATE_DUST = of("calcium_nitrate_dust");
+    public static final Item ITEM_CELLULOSE_FIBRES = of("cellulose_fibres");
+    public static final Item ITEM_PHOSPHORITE_DUST = of("phosphorite_dust");
+    public static final Item ITEM_TEST_TUBE = of("test_tube");
+
+    //Biotech: Algae
+    public static final Item BLUE_ALGAE = of("blue_algae");
+    public static final Item BROWN_ALGAE = of("brown_algae");
+    public static final Item GREEN_ALGAE = of("green_algae");
+    public static final Item RED_ALGAE = of("red_algae");
+    public static final Item YELLOW_ALGAE = of("yellow_algae");
+
+    //Biotech: Samples
+    public static final Item SAMPLE_ALGAE_BLUE = of("sample_algae_blue");
+    public static final Item SAMPLE_ALGAE_BROWN = of("sample_algae_brown");
+    public static final Item SAMPLE_ALGAE_GREEN = of("sample_algae_green");
+    public static final Item SAMPLE_ALGAE_RED = of("sample_algae_red");
+    public static final Item SAMPLE_ALGAE_YELLOW = of("sample_algae_yellow");
+    public static final Item SAMPLE_BEEF = of("sample_beef");
+    public static final Item SAMPLE_CHICKEN = of("sample_chicken");
+    public static final Item SAMPLE_COD = of("sample_cod");
+    public static final Item SAMPLE_MUTTON = of("sample_mutton");
+    public static final Item SAMPLE_PORK = of("sample_pork");
+    public static final Item SAMPLE_SALMON = of("sample_salmon");
+    public static final Item SAMPLE_SQUID = of("sample_squid");
+    public static final Item SAMPLE_YEAST = of("sample_yeast");
 }

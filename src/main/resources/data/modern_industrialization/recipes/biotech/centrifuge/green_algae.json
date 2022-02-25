@@ -1,0 +1,19 @@
+{
+  "type": "modern_industrialization:centrifuge",
+  "eu": 4,
+  "duration": 200,
+  "fluid_inputs" : {
+    "fluid" : "modern_industrialization:green_algae_mixture",
+    "amount": 200
+  },
+  "fluid_outputs" : {
+    "fluid" : "modern_industrialization:salt_water",
+    "amount" : 100
+  },
+  "item_outputs" : [
+    {
+      "item" : "modern_industrialization:green_algae",
+      "amount" : 4
+    }
+  ]
+}

@@ -34,9 +34,18 @@ import java.util.function.Function;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
+
 public class MIMachineRecipeTypes {
     private static final List<MachineRecipeType> recipeTypes = new ArrayList<>();
     // @formatter:off
+    //Biotech
+    public static final MachineRecipeType AQUARIUM = create("aquarium").withItemInputs().withFluidInputs().withItemOutputs().withFluidInputs();
+    public static final MachineRecipeType BIOREACTOR = create("bioreactor").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType COMBUSTION_CHAMBER = create("combustion_chamber").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType EXTRACTOR = create("extractor").withItemInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType FILTER = create("filter").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType SAMPLING_MACHINE = create("sampling_machine").withItemInputs().withFluidInputs().withItemOutputs();
+
     // Single block
     public static final MachineRecipeType ASSEMBLER = create("assembler").withItemInputs().withFluidInputs().withItemOutputs();
     public static final MachineRecipeType CENTRIFUGE = create("centrifuge").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();

@@ -50,6 +50,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 
@@ -131,6 +132,20 @@ public class MIBlock extends Block {
 
     // Multiblock
     public static final MIBlock FUSION_CHAMBER = new MIBlock("fusion_chamber");
+
+    //Biotech
+    public static final MIBlock FIBREBOARD = new MIBlock("fibreboard", Properties.copy(Blocks.OAK_PLANKS));
+
+    //Biotech: Algae
+    public static final MIBlock BLUE_ALGAE_BLOCK = new MIBlock("blue_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
+    public static final MIBlock BROWN_ALGAE_BLOCK = new MIBlock("brown_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
+    public static final MIBlock GREEN_ALGAE_BLOCK = new MIBlock("green_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
+    public static final MIBlock RED_ALGAE_BLOCK = new MIBlock("red_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
+    public static final MIBlock YELLOW_ALGAE_BLOCK = new MIBlock("yellow_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
+
+    //Biotech: MInerals
+    public static final MIBlock PHOSPHORITE = new MIBlock("phosphorite", Properties.copy(Blocks.ANDESITE));
+    public static final MIBlock POLISHED_PHOSPHORITE = new MIBlock("polished_phosphorite", Properties.copy(Blocks.POLISHED_ANDESITE));
 
     // other
     public static final MIBlock INDUSTRIAL_TNT = new MIBlock("industrial_tnt",

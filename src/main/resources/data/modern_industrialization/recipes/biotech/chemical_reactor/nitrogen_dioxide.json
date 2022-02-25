@@ -1,0 +1,22 @@
+{
+  "type": "modern_industrialization:chemical_reactor",
+  "eu": 8,
+  "duration": 100,
+
+  "fluid_inputs" : [
+    {
+      "fluid": "modern_industrialization:nitric_oxide",
+      "amount": 400
+    },
+    {
+      "fluid": "modern_industrialization:oxygen",
+      "amount": 200
+    }
+  ],
+  "fluid_outputs" : [
+    {
+      "fluid" : "modern_industrialization:nitrogen_dioxide",
+      "amount" : 400
+    }
+  ]
+}
