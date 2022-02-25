@@ -31,10 +31,10 @@ import mcp.mobius.waila.api.TooltipPosition;
 public class MIWailaPlugin implements IWailaPlugin {
     @Override
     public void register(IRegistrar r) {
-        r.registerBlockDataProvider(new PipeDataProvider(), PipeBlockEntity.class);
+        r.addBlockData(new PipeDataProvider(), PipeBlockEntity.class);
 
         PipeComponentProvider pipeComponentProvider = new PipeComponentProvider();
-        r.registerComponentProvider(pipeComponentProvider, TooltipPosition.HEAD, PipeBlockEntity.class);
-        r.registerComponentProvider(pipeComponentProvider, TooltipPosition.BODY, PipeBlockEntity.class);
+        r.addComponent(pipeComponentProvider, TooltipPosition.HEAD, PipeBlockEntity.class);
+        r.addComponent(pipeComponentProvider, TooltipPosition.BODY, PipeBlockEntity.class);
     }
 }
