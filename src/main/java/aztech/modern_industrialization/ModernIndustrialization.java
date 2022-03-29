@@ -42,6 +42,8 @@ import aztech.modern_industrialization.misc.guidebook.GuidebookEvents;
 import aztech.modern_industrialization.nuclear.NuclearItem;
 import aztech.modern_industrialization.pipes.MIPipes;
 import java.util.Map;
+
+import aztech.modern_industrialization.villagers.MIProfession;
 import me.shedaniel.cloth.api.common.events.v1.PlayerChangeWorldCallback;
 import me.shedaniel.cloth.api.common.events.v1.PlayerLeaveCallback;
 import net.devtech.arrp.api.RRPCallback;
@@ -121,9 +123,7 @@ public class ModernIndustrialization implements ModInitializer {
         setupBlocks();
         MIBlockEntityTypes.init();
         MIFluids.setupFluids();
-        //Init Biotech
-        //MBMachineRecipeTypes.init();
-        //MBSingleBlockCraftingMachines.init();
+        MIProfession.init();
 
         // fields.
         setupPackets();
@@ -159,12 +159,35 @@ public class ModernIndustrialization implements ModInitializer {
     }
 
     public static void registerItem(Item item, String id) {
-        ResourceLocation ID = new MIIdentifier(id);
+        String path;
+        String name;
+        if (id.contains("aquaculture/")){
+            path = "aquaculture/";
+            name = id.replace("aquaculture/", "");
+        }
+        else if (id.contains("foods/")){
+            path = "foods/";
+            name = id.replace("foods/", "");
+        }
+        else if (id.contains("mycology/")){
+            path = "mycology/";
+            name = id.replace("mycology/", "");
+        }
+        else if (id.contains("samples/")){
+            path = "samples/";
+            name = id.replace("samples/", "");
+        }
+        else{
+            path = "";
+            name = id;
+        }
+
+        ResourceLocation ID = new MIIdentifier(name);
         Registry.register(Registry.ITEM, ID, item);
 
         RESOURCE_PACK.addModel(
                 JModel.model().parent(MIItem.handhelds.contains(id) ? "minecraft:item/handheld" : "minecraft:item/generated")
-                        .textures(new JTextures().layer0(ID.getNamespace() + ":items/" + ID.getPath())),
+                        .textures(new JTextures().layer0(ID.getNamespace() + ":items/" + path + ID.getPath())),
                 new ResourceLocation(ID.getNamespace() + ":item/" + ID.getPath()));
     }
 
@@ -273,7 +296,9 @@ public class ModernIndustrialization implements ModInitializer {
         FluidFuelRegistry.register(MIFluids.TRITIUM, 1);
         FluidFuelRegistry.register(MIFluids.CRUDE_OIL, 8);
         FluidFuelRegistry.register(MIFluids.SYNTHETIC_OIL, 8);
+        FluidFuelRegistry.register(MIFluids.METHANE, 40);
         FluidFuelRegistry.register(MIFluids.NAPHTHA, 40);
+        FluidFuelRegistry.register(MIFluids.ETHANOL, 48);
         FluidFuelRegistry.register(MIFluids.CREOSOTE, 80);
         FluidFuelRegistry.register(MIFluids.LIGHT_FUEL, 80);
         FluidFuelRegistry.register(MIFluids.HEAVY_FUEL, 120);

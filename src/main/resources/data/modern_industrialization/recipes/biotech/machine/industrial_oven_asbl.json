@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bab",
+    "bcb",
+    "hhh"
+  ],
+  "key": {
+    "a": {
+      "item": "modern_industrialization:analog_circuit"
+    },
+    "b": {
+      "item": "minecraft:bricks"
+    },
+    "c": {
+      "item": "modern_industrialization:steel_machine_casing"
+    },
+    "h": {
+      "item": "modern_industrialization:heating_element"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:industrial_oven",
+    "count": 1
+  }
+}

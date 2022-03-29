@@ -38,13 +38,6 @@ import net.minecraft.resources.ResourceLocation;
 public class MIMachineRecipeTypes {
     private static final List<MachineRecipeType> recipeTypes = new ArrayList<>();
     // @formatter:off
-    //Biotech
-    public static final MachineRecipeType AQUARIUM = create("aquarium").withItemInputs().withFluidInputs().withItemOutputs().withFluidInputs();
-    public static final MachineRecipeType BIOREACTOR = create("bioreactor").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
-    public static final MachineRecipeType COMBUSTION_CHAMBER = create("combustion_chamber").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
-    public static final MachineRecipeType EXTRACTOR = create("extractor").withItemInputs().withItemOutputs().withFluidOutputs();
-    public static final MachineRecipeType FILTER = create("filter").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
-    public static final MachineRecipeType SAMPLING_MACHINE = create("sampling_machine").withItemInputs().withFluidInputs().withItemOutputs();
 
     // Single block
     public static final MachineRecipeType ASSEMBLER = create("assembler").withItemInputs().withFluidInputs().withItemOutputs();
@@ -62,6 +55,7 @@ public class MIMachineRecipeTypes {
     public static final MachineRecipeType POLARIZER = create("polarizer").withItemInputs().withItemOutputs();
     public static final MachineRecipeType UNPACKER = create("unpacker").withItemInputs().withItemOutputs();
     public static final MachineRecipeType WIREMILL = create("wiremill").withItemInputs().withItemOutputs();
+
     // Multi block
     public static final MachineRecipeType BLAST_FURNACE = create("blast_furnace").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
     public static final MachineRecipeType COKE_OVEN = create("coke_oven").withItemInputs().withItemOutputs().withFluidOutputs();
@@ -74,6 +68,21 @@ public class MIMachineRecipeTypes {
     public static final MachineRecipeType QUARRY = create("quarry").withItemInputs().withItemOutputs();
     public static final MachineRecipeType VACUUM_FREEZER = create("vacuum_freezer").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
 
+    //Biotech
+    public static final MachineRecipeType BIOREACTOR = create("bioreactor").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType COMBUSTION_CHAMBER = create("combustion_chamber").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType DEHYDRATOR = create("dehydrator").withItemInputs().withItemOutputs().withFluidInputs();
+    public static final MachineRecipeType EXTRACTOR = create("extractor").withItemInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType FILTER = create("filter").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType SAMPLING_MACHINE = create("sampling_machine").withItemInputs().withFluidInputs().withItemOutputs();
+
+    //Biotech Multi block
+    public static final MachineRecipeType AQUACULTURE_POND = create("aquaculture_pond").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
+    public static final MachineRecipeType COMPOSTER = create("composter").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
+    public static final MachineRecipeType GROWTH_CHAMBER = create("growth_chamber").withItemInputs().withItemOutputs().withFluidInputs();
+    public static final MachineRecipeType INDUSTRIAL_OVEN = create("industrial_oven").withItemInputs().withItemOutputs();
+    public static final MachineRecipeType INDUSTRIAL_PRESS = create("industrial_press").withItemInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType TREE_PLANTER = create("tree_planter").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
 
     // @formatter:on
 

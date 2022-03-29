@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sgs",
+    "ggg",
+    "sgs"
+  ],
+  "key": {
+    "s": {
+      "item": "modern_industrialization:steel_rod"
+    },
+    "g": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:aquarium",
+    "count": 1
+  }
+}

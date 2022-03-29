@@ -9,7 +9,7 @@
     },
     {
       "fluid": "minecraft:water",
-      "amount": 1000
+      "amount": 200
     }
   ],
   "fluid_outputs": [
@@ -19,7 +19,7 @@
     },
     {
       "fluid": "modern_industrialization:steam",
-      "amount": 8000
+      "amount": 3200
     }
   ]
 }

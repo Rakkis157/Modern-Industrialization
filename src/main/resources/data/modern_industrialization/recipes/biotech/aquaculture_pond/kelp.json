@@ -1,0 +1,27 @@
+{
+  "type": "modern_industrialization:aquaculture_pond",
+  "eu": 4,
+  "duration": 1600,
+  "item_inputs": [
+    {
+      "item": "minecraft:kelp",
+      "amount": 4
+    },
+    {
+      "tag": "c:fertilizers",
+      "amount": 2
+    }
+  ],
+  "fluid_inputs": [
+    {
+      "fluid": "modern_industrialization:salt_water",
+      "amount": 2000
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "minecraft:kelp",
+      "amount": 12
+    }
+  ]
+}

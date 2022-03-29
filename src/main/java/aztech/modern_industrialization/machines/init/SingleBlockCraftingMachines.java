@@ -54,13 +54,6 @@ public final class SingleBlockCraftingMachines {
         // @formatter:off
         //Biotech
         registerMachineTiers(
-                "aquarium", MIMachineRecipeTypes.AQUARIUM, 4, 2, 2, 2, guiParams -> {},
-                new ProgressBar.Parameters(103, 33, "arrow"), new RecipeEfficiencyBar.Parameters(50, 66), new EnergyBar.Parameters(15, 34),
-                items -> items.addSlots(62, 27, 2, 2).addSlots(129, 27, 2, 1), fluids -> fluids.addSlots(42, 27, 2, 1).addSlots(149, 27, 2, 1),
-                true, false, true,
-                TIER_ELECTRIC, 24
-        );
-        registerMachineTiers(
                 "bioreactor", MIMachineRecipeTypes.BIOREACTOR, 3, 3, 3, 3, guiParams -> {},
                 new ProgressBar.Parameters(88, 35, "centrifuge"), new RecipeEfficiencyBar.Parameters(50, 66), new EnergyBar.Parameters(12, 35),
                 items -> items.addSlots(30, 27, 1, 3).addSlots(116, 27, 1, 3), fluids -> fluids.addSlots(30, 47, 1, 3).addSlots(116, 47, 1, 3),
@@ -73,6 +66,13 @@ public final class SingleBlockCraftingMachines {
                 items -> items.addSlots(62, 27, 2, 2).addSlots(129, 27, 2, 1), fluids -> fluids.addSlots(42, 27, 2, 1).addSlots(149, 27, 2, 1),
                 true, false, false,
                 TIER_ELECTRIC, 24
+        );
+        registerMachineTiers(
+                "dehydrator", MIMachineRecipeTypes.DEHYDRATOR, 1, 1, 1, 0, guiParams -> {},
+                new ProgressBar.Parameters(87, 33, "furnace"), new RecipeEfficiencyBar.Parameters(38, 66), DEFAULT_ENERGY_BAR,
+                items -> items.addSlot(40, 35).addSlot(120, 35), fluids -> fluids.addSlot(60, 35),
+                true, false, false,
+                TIER_ELECTRIC, 16
         );
         registerMachineTiers(
                 "extractor", MIMachineRecipeTypes.EXTRACTOR, 1, 4, 0, 0, guiParams -> {},
@@ -90,8 +90,8 @@ public final class SingleBlockCraftingMachines {
         );
         registerMachineTiers(
                 "sampling_machine", MIMachineRecipeTypes.SAMPLING_MACHINE, 2, 1, 1, 0, guiParams -> {},
-                new ProgressBar.Parameters(77, 34, "compress"), new RecipeEfficiencyBar.Parameters(38, 62), new EnergyBar.Parameters(18, 30),
-                items -> items.addSlots(46, 25, 1, 2).addSlot(102, 35), fluids -> fluids.addSlot(46, 45),
+                new ProgressBar.Parameters(110, 34, "compress"), new RecipeEfficiencyBar.Parameters(38, 62), new EnergyBar.Parameters(18, 30),
+                items -> items.addSlots(40, 35, 2, 1).addSlot(140, 35), fluids -> fluids.addSlot(80, 45),
                 true, false, false,
                 TIER_ELECTRIC, 1
         );

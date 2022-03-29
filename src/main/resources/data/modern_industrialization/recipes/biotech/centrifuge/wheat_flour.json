@@ -1,0 +1,19 @@
+{
+  "type": "modern_industrialization:centrifuge",
+  "eu": 4,
+  "duration": 200,
+  "item_inputs" : {
+    "item" : "modern_industrialization:wheat_whole_flour",
+    "amount": 2
+  },
+  "item_outputs" : [
+    {
+      "item" : "modern_industrialization:wheat_flour",
+      "amount" : 2
+    },
+    {
+      "item" : "modern_industrialization:wheat_bran",
+      "amount" : 1
+    }
+  ]
+}

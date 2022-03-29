@@ -1,5 +1,8 @@
 {
   "replace": false,
   "values": [
+    "modern_industrialization:arcane_substrate",
+    "modern_industrialization:mushroom_substrate",
+    "modern_industrialization:nether_substrate"
   ]
 }

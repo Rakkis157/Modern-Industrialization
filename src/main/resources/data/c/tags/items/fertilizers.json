@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:bone_meal"
+    "minecraft:bone_meal",
+    "modern_industrialization:compost"
   ]
 }

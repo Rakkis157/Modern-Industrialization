@@ -129,7 +129,7 @@ public final class StandardRecipes {
         new MIRecipeBuilder(ctx, MIMachineRecipeTypes.WIREMILL, "fine_wire").addTaggedPartInput(WIRE, 1).addPartOutput(FINE_WIRE, 4);
         // EXTRA ASSEMBLER
         new MIRecipeBuilder(ctx, MIMachineRecipeTypes.ASSEMBLER, "rotor").addTaggedPartInput(BLADE, 4).addTaggedPartInput(RING, 1)
-                .addFluidInput("modern_industrialization:soldering_alloy", 100).addPartOutput(ROTOR, 1);
+                .addFluidInput("modern_industrialization:soldering_alloy", 100).addPartOutput(ROTOR, 2);
         new MIRecipeBuilder(ctx, MIMachineRecipeTypes.ASSEMBLER, "gear").addTaggedPartInput(PLATE, 4).addTaggedPartInput(RING, 1)
                 .addFluidInput("modern_industrialization:soldering_alloy", 100).addPartOutput(GEAR, 2);
         new MIRecipeBuilder(ctx, MIMachineRecipeTypes.ASSEMBLER, "drill_head").addTaggedPartInput(PLATE, 1).addTaggedPartInput(CURVED_PLATE, 2)

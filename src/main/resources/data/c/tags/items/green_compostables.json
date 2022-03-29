@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:apple",
+    "minecraft:kelp",
+    "#minecraft:flowers",
+    "modern_industrialization:cellulose_fibres",
+    "modern_industrialization:crushed_leaves"
+  ]
+}

@@ -1,17 +1,17 @@
 {
   "type": "modern_industrialization:bioreactor",
   "eu": 4,
-  "duration": 3000,
+  "duration": 1200,
   "item_inputs": [
     {
-      "item": "modern_industrialization:blue_algae",
+      "item": "modern_industrialization:sample_blue_algae",
       "amount": 1
     }
   ],
   "fluid_inputs": [
     {
-      "fluid": "modern_industrialization:salt_water",
-      "amount": 4000
+      "fluid": "minecraft:water",
+      "amount": 6000
     },
     {
       "fluid": "modern_industrialization:carbon_dioxide",
@@ -25,11 +25,11 @@
   "fluid_outputs": [
     {
       "fluid": "modern_industrialization:blue_algae_mixture",
-      "amount": 6000
+      "amount": 8000
     },
     {
       "fluid": "modern_industrialization:oxygen",
-      "amount": 2000
+      "amount": 4000
     }
   ]
 }

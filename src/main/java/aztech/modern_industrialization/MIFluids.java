@@ -105,21 +105,25 @@ public class MIFluids {
     public static final CraftingFluid UU_MATER = new CraftingFluid("uu_matter", 0xffff00bf, false);
 
     //Biotech
-//    public static final CraftingFluid AQUACULTURE_WASTE_WATER_= new CraftingFluid("aquaculture_waste_water", 0xff153a59);
-    public static final CraftingFluid BLUE_ALGAE_MIXTURE_= new CraftingFluid("blue_algae_mixture", 0xff007374);
-    public static final CraftingFluid BROWN_ALGAE_MIXTURE_= new CraftingFluid("brown_algae_mixture", 0xff554500);
-    public static final CraftingFluid GREEN_ALGAE_MIXTURE_= new CraftingFluid("green_algae_mixture", 0xff006900);
-    public static final CraftingFluid RED_ALGAE_MIXTURE_= new CraftingFluid("red_algae_mixture", 0xff4b0000);
-    public static final CraftingFluid YELLOW_ALGAE_MIXTURE_= new CraftingFluid("yellow_algae_mixture", 0xff5f6400);
+    public static final CraftingFluid AQUARIUM_WASTE = new CraftingFluid("aquarium_waste", 0xff153a59);
+    public static final CraftingFluid BLOOD= new CraftingFluid("blood", 0xff660000);
+    public static final CraftingFluid BLUE_ALGAE_MIXTURE = new CraftingFluid("blue_algae_mixture", 0xff007374);
+    public static final CraftingFluid BROWN_ALGAE_MIXTURE = new CraftingFluid("brown_algae_mixture", 0xff554500);
+    public static final CraftingFluid GREEN_ALGAE_MIXTURE = new CraftingFluid("green_algae_mixture", 0xff006900);
     public static final CraftingFluid SALT_WATER_= new CraftingFluid("salt_water", 0xffc1d0bf);
+    public static final CraftingFluid SLACK_OIL= new CraftingFluid("slack_oil", 0xff939315);
     public static final CraftingFluid YEAST_MIXTURE = new CraftingFluid("yeast_mixture", 0xfffcf696);
 
     public static final CraftingFluid AMMONIA= new CraftingFluid("ammonia", 0xffccf57f, true);
-    public static final CraftingFluid CARBON_DIOXIDE_= new CraftingFluid("carbon_dioxide", 0xff464646, true);
+    public static final CraftingFluid CARBON_DIOXIDE = new CraftingFluid("carbon_dioxide", 0xff464646, true);
     public static final CraftingFluid HOT_CARBON_DIOXIDE_= new CraftingFluid("hot_carbon_dioxide", 0xff575454, true);
     public static final CraftingFluid NITRIC_ACID = new CraftingFluid("nitric_acid", 0xff2b90ab, true);
     public static final CraftingFluid NITRIC_OXIDE = new CraftingFluid("nitric_oxide", 0xff52b2cc, true);
     public static final CraftingFluid NITROGEN_DIOXIDE = new CraftingFluid("nitrogen_dioxide", 0xff3daecc, true);
+    public static final CraftingFluid SULFUR_DIOXIDE = new CraftingFluid("sulfur_dioxide", 0xffe0d738, true);
+
+    public static final CraftingFluid FISH_OIL = new CraftingFluid("fish_oil", 0xff8c7d18);
+    public static final CraftingFluid SUNFLOWER_OIL = new CraftingFluid("sunflower_oil", 0xffcdb50e);
 
     //
 

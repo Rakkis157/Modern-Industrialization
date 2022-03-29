@@ -1,7 +1,11 @@
 {
   "replace": false,
   "values": [
+    "modern_industrialization:aquarium",
+    "modern_industrialization:heating_element",
+    "modern_industrialization:periclase",
     "modern_industrialization:phosphorite",
-    "modern_industrialization:polished_phosphorite"
+    "modern_industrialization:polished_phosphorite",
+    "modern_industrialization:rubber_block"
   ]
 }

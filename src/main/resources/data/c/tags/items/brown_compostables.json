@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "modern_industrialization:straw",
+    "modern_industrialization:wood_pulp",
+    "#c:brans",
+    "#minecraft:saplings"
+  ]
+}

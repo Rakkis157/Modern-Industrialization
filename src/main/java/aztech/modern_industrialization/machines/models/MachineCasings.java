@@ -43,6 +43,7 @@ public class MachineCasings {
     public static final MachineCasing FIREBRICKS = create("firebricks");
     public static final MachineCasing FROSTPROOF = create("frostproof_machine_casing");
     public static final MachineCasing HEATPROOF = create("heatproof_machine_casing");
+    public static final MachineCasing RUBBER = create("rubber");
     public static final MachineCasing STEEL = create("steel");
     public static final MachineCasing STEEL_CRATE = create("steel_crate");
     public static final MachineCasing LV = create("lv");

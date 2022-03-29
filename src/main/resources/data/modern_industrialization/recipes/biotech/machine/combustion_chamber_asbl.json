@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BfB",
+    "CHC",
+    "BCB"
+  ],
+  "key": {
+    "B": {
+      "item": "modern_industrialization:fire_clay_bricks"
+    },
+    "C": {
+      "item": "modern_industrialization:cupronickel_wire_magnetic"
+    },
+    "H": {
+      "item": "modern_industrialization:basic_machine_hull"
+    },
+    "f": {
+      "tag": "modern_industrialization:fluid_pipes"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:combustion_chamber",
+    "count": 1
+  }
+}

@@ -26,15 +26,20 @@ package aztech.modern_industrialization;
 import static aztech.modern_industrialization.ModernIndustrialization.METAL_MATERIAL;
 import static aztech.modern_industrialization.ModernIndustrialization.STONE_MATERIAL;
 
+import aztech.modern_industrialization.blocks.PaddedBlock;
 import aztech.modern_industrialization.blocks.TrashCanBlock;
+import aztech.modern_industrialization.blocks.aquarium.AquariumBlock;
 import aztech.modern_industrialization.blocks.creativestorageunit.CreativeStorageUnitBlock;
 import aztech.modern_industrialization.blocks.creativetank.CreativeTankBlock;
 import aztech.modern_industrialization.blocks.creativetank.CreativeTankItem;
 import aztech.modern_industrialization.blocks.forgehammer.ForgeHammerBlock;
 import aztech.modern_industrialization.util.MobSpawning;
+
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.function.Function;
+
+import aztech.modern_industrialization.util.string.RS;
 import net.devtech.arrp.json.blockstate.JBlockModel;
 import net.devtech.arrp.json.blockstate.JState;
 import net.devtech.arrp.json.blockstate.JVariant;
@@ -47,12 +52,18 @@ import net.devtech.arrp.json.models.JTextures;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class MIBlock extends Block {
 
@@ -71,6 +82,13 @@ public class MIBlock extends Block {
     public static final int FLAG_BLOCK_LOOT = 1;
     public static final int FLAG_BLOCK_MODEL = 1 << 1;
     public static final int FLAG_BLOCK_ITEM_MODEL = 1 << 2;
+
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+        return false;
+    }
+    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return false;
+    }
 
     public MIBlock(String id, Properties settings, int registrationFlag) {
         this(id, settings, null, registrationFlag);
@@ -104,6 +122,10 @@ public class MIBlock extends Block {
         this.FLAGS = registrationFlag;
     }
 
+    public MIBlock(String id, Block block){
+        this(id, Properties.copy(block));
+    }
+
     public MIBlock(String id, Properties settings) {
         this(id, settings, FLAG_BLOCK_LOOT | FLAG_BLOCK_MODEL | FLAG_BLOCK_ITEM_MODEL);
     }
@@ -123,6 +145,7 @@ public class MIBlock extends Block {
                 .isValidSpawn(MobSpawning.NO_SPAWN));
     }
 
+
     // hull
     public static final MIBlock BASIC_MACHINE_HULL = new MIBlock("basic_machine_hull");
     public static final MIBlock ADVANCED_MACHINE_HULL = new MIBlock("advanced_machine_hull");
@@ -132,20 +155,6 @@ public class MIBlock extends Block {
 
     // Multiblock
     public static final MIBlock FUSION_CHAMBER = new MIBlock("fusion_chamber");
-
-    //Biotech
-    public static final MIBlock FIBREBOARD = new MIBlock("fibreboard", Properties.copy(Blocks.OAK_PLANKS));
-
-    //Biotech: Algae
-    public static final MIBlock BLUE_ALGAE_BLOCK = new MIBlock("blue_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
-    public static final MIBlock BROWN_ALGAE_BLOCK = new MIBlock("brown_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
-    public static final MIBlock GREEN_ALGAE_BLOCK = new MIBlock("green_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
-    public static final MIBlock RED_ALGAE_BLOCK = new MIBlock("red_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
-    public static final MIBlock YELLOW_ALGAE_BLOCK = new MIBlock("yellow_algae_block", Properties.copy(Blocks.NETHER_WART_BLOCK));
-
-    //Biotech: MInerals
-    public static final MIBlock PHOSPHORITE = new MIBlock("phosphorite", Properties.copy(Blocks.ANDESITE));
-    public static final MIBlock POLISHED_PHOSPHORITE = new MIBlock("polished_phosphorite", Properties.copy(Blocks.POLISHED_ANDESITE));
 
     // other
     public static final MIBlock INDUSTRIAL_TNT = new MIBlock("industrial_tnt",
@@ -162,6 +171,26 @@ public class MIBlock extends Block {
 
     public static final CreativeTankBlock CREATIVE_TANK_BLOCK = new CreativeTankBlock();
     public static final CreativeStorageUnitBlock CREATIVE_STORAGE_UNIT = new CreativeStorageUnitBlock();
+
+
+    // Biotech
+    public static final MIBlock AQUARIUM = new AquariumBlock().asProfessionBlock();
+    public static final MIBlock ARCANE_SUBSTRATE = new MIBlock("arcane_substrate", Blocks.DIRT);
+    public static final MIBlock BLUE_ALGAE_BLOCK = new MIBlock("blue_algae_block", Blocks.NETHER_WART_BLOCK);
+    public static final MIBlock BROWN_ALGAE_BLOCK = new MIBlock("brown_algae_block", Blocks.NETHER_WART_BLOCK);
+    public static final MIBlock ESSENCE_BLOCK = new MIBlock("essence_block", Blocks.OAK_PLANKS);
+    public static final MIBlock FIBREBOARD = new MIBlock("fibreboard", Blocks.OAK_PLANKS);
+    public static final MIBlock GREEN_ALGAE_BLOCK = new MIBlock("green_algae_block", Blocks.NETHER_WART_BLOCK);
+    public static final MIBlock HEATING_ELEMENT = new MIBlock("heating_element", Properties.of(Material.STONE, MaterialColor.FIRE)
+            .requiresCorrectToolForDrops().strength(2.0F, 6.0F).lightLevel((blockStatex) -> {return 10;}));
+    public static final MIBlock MUSHROOM_SUBSTRATE = new MIBlock("mushroom_substrate", Blocks.DIRT);
+    public static final MIBlock NETHER_SUBSTRATE = new MIBlock("nether_substrate", Blocks.DIRT);
+    public static final MIBlock PERICLASE = new MIBlock("periclase", Blocks.ANDESITE);
+    public static final MIBlock PHOSPHORITE = new MIBlock("phosphorite", Blocks.ANDESITE);
+    public static final MIBlock POLISHED_PHOSPHORITE = new MIBlock("polished_phosphorite", Blocks.POLISHED_ANDESITE);
+    public static final MIBlock RUBBER_BLOCK = new MIBlock("rubber_block", Blocks.QUARTZ_BLOCK);
+    public static final MIBlock STRAW_BALE = new PaddedBlock("straw_bale", Properties.copy(Blocks.HAY_BLOCK)).asColumn();
+    public static final MIBlock WAX_BLOCK = new MIBlock("wax_block", Blocks.TERRACOTTA);
 
     static {
         // Extra setup
@@ -187,6 +216,18 @@ public class MIBlock extends Block {
         return this.setBlockModel(JModel.model().parent("block/cube_column")
                 .textures(new JTextures().var("end", ModernIndustrialization.MOD_ID + ":blocks/" + id + "_end").var("side",
                         ModernIndustrialization.MOD_ID + ":blocks/" + id + "_side")));
+    }
+
+    public MIBlock asProfessionBlock() {
+        return this.setBlockModel(JModel.model().parent("block/cube")
+                .textures(new JTextures()
+                        .var("particle", RS.isMI("blocks/" + id + "_side"))
+                        .var("north", RS.isMI("blocks/" + id + "_side"))
+                        .var("south", RS.isMI("blocks/" + id + "_front"))
+                        .var("east", RS.isMI("blocks/" + id + "_front"))
+                        .var("west", RS.isMI("blocks/" + id + "_side"))
+                        .var("up", RS.isMI("blocks/" + id + "_top"))
+                        .var("down", RS.isMI("blocks/" + id + "_bottom"))));
     }
 
     public MIBlock setItemModel(JModel itemModel) {

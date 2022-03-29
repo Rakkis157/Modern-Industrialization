@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 30,
+  "ingredient": {
+    "item": "modern_industrialization:essence_block"
+  },
+  "result": "minecraft:charcoal"
+}

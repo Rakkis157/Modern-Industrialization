@@ -1,0 +1,17 @@
+{
+  "type": "modern_industrialization:dehydrator",
+  "eu": 8,
+  "duration": 400,
+  "fluid_inputs": [
+    {
+      "fluid": "modern_industrialization:yeast_mixture",
+      "amount": 500
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "modern_industrialization:yeast",
+      "amount": 5
+    }
+  ]
+}

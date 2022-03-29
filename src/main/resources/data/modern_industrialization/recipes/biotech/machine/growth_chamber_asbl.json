@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bgb",
+    "gcg",
+    "brb"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:bricks"
+    },
+    "c": {
+      "item": "modern_industrialization:steel_machine_casing"
+    },
+    "g": {
+      "item": "minecraft:tinted_glass"
+    },
+    "r": {
+      "item": "modern_industrialization:bronze_rotor"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:growth_chamber",
+    "count": 1
+  }
+}

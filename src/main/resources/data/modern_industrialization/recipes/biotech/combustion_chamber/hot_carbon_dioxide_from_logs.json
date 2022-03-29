@@ -11,13 +11,19 @@
   "fluid_inputs": [
     {
       "fluid": "modern_industrialization:oxygen",
-      "amount": 2000
+      "amount": 1000
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "modern_industrialization:wood_ash",
+      "amount": 1
     }
   ],
   "fluid_outputs": [
     {
       "fluid": "modern_industrialization:hot_carbon_dioxide",
-      "amount": 2000
+      "amount": 1000
     }
   ]
 }

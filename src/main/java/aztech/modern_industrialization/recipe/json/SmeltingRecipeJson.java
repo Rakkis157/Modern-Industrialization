@@ -41,6 +41,7 @@ public class SmeltingRecipeJson extends RecipeJson<SmeltingRecipeJson> {
         public static SmeltingRecipeType ofBlasting(boolean blasting) {
             return blasting ? BLASTING : SMELTING;
         }
+
     }
 
     public static class Ingredient {
@@ -55,5 +56,19 @@ public class SmeltingRecipeJson extends RecipeJson<SmeltingRecipeJson> {
         this.ingredient = new Ingredient();
         ingredient.item = inputItem;
         result = outputItem;
+    }
+
+    public SmeltingRecipeJson(String inputItem, String outputItem, int cookingtime, double experience, String type) {
+        this.type = "minecraft:" + type;
+        this.smeltingRecipeType = null;
+        this.cookingtime = cookingtime;
+        this.experience = experience;
+        this.ingredient = new Ingredient();
+        ingredient.item = inputItem;
+        result = outputItem;
+    }
+
+    public static SmeltingRecipeJson create(String ingredient, String result, int cookingTime, double experience, String recipeType){
+        return new SmeltingRecipeJson(ingredient, result, cookingTime, experience, recipeType);
     }
 }

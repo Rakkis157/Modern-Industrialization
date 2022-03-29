@@ -11,7 +11,7 @@
     "amount": 500
   },
   "fluid_outputs": {
-    "fluid": "modern_industrialization:lubricant",
+    "fluid": "modern_industrialization:slack_oil",
     "amount": 500
   }
 }

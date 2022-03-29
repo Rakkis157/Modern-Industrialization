@@ -60,6 +60,7 @@ import aztech.modern_industrialization.util.TextHelper;
 import java.util.Collections;
 import java.util.List;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -70,6 +71,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.impl.content.registry.FuelRegistryImpl;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -79,6 +82,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 
 public class ModernIndustrializationClient implements ClientModInitializer {
     @Override
@@ -101,6 +105,8 @@ public class ModernIndustrializationClient implements ClientModInitializer {
         setupClientCommands();
         VersionEvents.init();
         FaqTooltips.init();
+
+        BlockRenderLayerMap.INSTANCE.putBlock(MIBlock.AQUARIUM, RenderType.translucent());
 
         ModernIndustrialization.LOGGER.info("Modern Industrialization client setup done!");
     }

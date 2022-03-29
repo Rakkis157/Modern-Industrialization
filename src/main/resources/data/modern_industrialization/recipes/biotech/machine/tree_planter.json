@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pgp",
+    "fhf",
+    "pip"
+  ],
+  "key": {
+    "p": {
+      "item": "modern_industrialization:steel_plate"
+    },
+    "g": {
+      "item": "minecraft:green_stained_glass"
+    },
+    "h": {
+      "item": "modern_industrialization:basic_machine_hull"
+    },
+    "f": {
+      "tag": "modern_industrialization:fluid_pipes"
+    },
+    "i": {
+      "tag": "modern_industrialization:item_pipes"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:sampling_machine",
+    "count": 1
+  }
+}

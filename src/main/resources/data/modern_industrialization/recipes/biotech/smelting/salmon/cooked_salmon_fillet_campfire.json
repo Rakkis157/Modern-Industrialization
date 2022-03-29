@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "modern_industrialization:salmon_fillet"
+  },
+  "result": "modern_industrialization:cooked_salmon_fillet"
+}

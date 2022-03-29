@@ -47,6 +47,15 @@ public class MIDatagenEntrypoint implements DataGeneratorEntrypoint {
         dataGenerator.addProvider(CompatRecipesProvider::new);
         dataGenerator.addProvider(SteelUpgradeProvider::new);
 
+        dataGenerator.addProvider(AquacultureRecipesProvider::new);
+        dataGenerator.addProvider(FoodRecipesProvider::new);
+        dataGenerator.addProvider(MycologyRecipesProvider::new);
+        dataGenerator.addProvider(OxidationRecipesProvider::new);
+        dataGenerator.addProvider(PackUnpackRecipesProvider::new);
+        dataGenerator.addProvider(PlanterRecipesProvider::new);
+        dataGenerator.addProvider(SampleRecipesProvider::new);
+        dataGenerator.addProvider(WaxingRecipesProvider::new);
+
         dataGenerator.addProvider(MIAdvancementsProvider::new);
 
         dataGenerator.addProvider(MachineModelsProvider::new);

@@ -5,17 +5,17 @@
   "fluid_inputs": [
     {
       "fluid": "modern_industrialization:ethanol",
-      "amount": 200
+      "amount": 100
     },
     {
       "fluid": "modern_industrialization:oxygen",
-      "amount": 600
+      "amount": 300
     }
   ],
   "fluid_outputs": [
     {
       "fluid": "modern_industrialization:carbon_dioxide",
-      "amount": 400
+      "amount": 200
     },
     {
       "fluid": "modern_industrialization:steam",

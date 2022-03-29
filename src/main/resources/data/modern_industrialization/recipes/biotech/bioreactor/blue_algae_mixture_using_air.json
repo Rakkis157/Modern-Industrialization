@@ -4,22 +4,18 @@
   "duration": 3000,
   "item_inputs": [
     {
-      "item": "modern_industrialization:blue_algae",
+      "item": "modern_industrialization:sample_blue_algae",
       "amount": 1
+    },
+    {
+      "item" : "modern_industrialization:air_intake",
+      "probability": 0
     }
   ],
   "fluid_inputs": [
     {
-      "fluid": "modern_industrialization:salt_water",
+      "fluid": "minecraft:water",
       "amount": 4000
-    },
-    {
-      "fluid": "modern_industrialization:carbon_dioxide",
-      "amount": 2000
-    },
-    {
-      "fluid": "modern_industrialization:nitrogen",
-      "amount": 2000
     }
   ],
   "fluid_outputs": [

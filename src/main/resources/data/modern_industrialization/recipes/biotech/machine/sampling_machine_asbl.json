@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ctc",
+    "rhr",
+    "ctc"
+  ],
+  "key": {
+    "c": {
+      "item": "modern_industrialization:analog_circuit"
+    },
+    "r": {
+      "item": "modern_industrialization:tin_rotor"
+    },
+    "t": {
+      "item": "modern_industrialization:test_tube"
+    },
+    "h": {
+      "item": "modern_industrialization:basic_machine_hull"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:sampling_machine",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "modern_industrialization:industrial_oven",
+  "eu": 4,
+  "duration": 400,
+  "item_inputs": [
+    {
+      "item": "modern_industrialization:wheat_dough",
+      "amount": 16
+    },
+    {
+      "item" : "modern_industrialization:industrial_oven_loaf_template",
+      "probability": 0
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "minecraft:bread",
+      "amount": 16
+    }
+  ]
+}

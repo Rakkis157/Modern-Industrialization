@@ -1,0 +1,17 @@
+{
+  "type": "modern_industrialization:packer",
+  "eu": 2,
+  "duration": 100,
+  "item_inputs": [
+    {
+      "item": "modern_industrialization:essence_mushroom",
+      "amount": 4
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "modern_industrialization:essence_block",
+      "amount": 1
+    }
+  ]
+}

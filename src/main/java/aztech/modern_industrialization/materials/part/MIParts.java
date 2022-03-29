@@ -89,6 +89,7 @@ public class MIParts {
     public static final CasingPart MACHINE_CASING = new CasingPart("machine_casing");
     public static final CasingPart MACHINE_CASING_PIPE = new CasingPart("machine_casing_pipe");
     public static final CasingPart MACHINE_CASING_SPECIAL = new CasingPart("machine_casing_special");
+    public static final RegularPart MESH = new RegularPart("mesh");
     public static final RegularPart NUGGET = new RegularPart("nugget");
     public static final OrePart ORE = new OrePart(false);
     public static final OrePart ORE_DEEPLSATE = new OrePart(true);

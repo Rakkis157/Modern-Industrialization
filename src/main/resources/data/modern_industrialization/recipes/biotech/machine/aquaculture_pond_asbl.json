@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    "THT",
+    "RfR"
+  ],
+  "key": {
+    "R": {
+      "item": "modern_industrialization:rubber_block"
+    },
+    "T": {
+      "item": "modern_industrialization:tin_rotor"
+    },
+    "C": {
+      "item": "modern_industrialization:analog_circuit"
+    },
+    "H": {
+      "item": "modern_industrialization:basic_machine_hull"
+    },
+    "f": {
+      "tag": "modern_industrialization:fluid_pipes"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:aquaculture_pond",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rsr",
+    "scs",
+    "rsr"
+  ],
+  "key": {
+    "c": {
+      "item": "modern_industrialization:cupronickel_coil"
+    },
+    "s": {
+      "item": "modern_industrialization:steel_mesh"
+    },
+    "r": {
+      "item": "modern_industrialization:steel_rod"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:heating_element",
+    "count": 1
+  }
+}

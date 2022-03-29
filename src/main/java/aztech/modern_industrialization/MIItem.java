@@ -24,32 +24,31 @@
 package aztech.modern_industrialization;
 
 import aztech.modern_industrialization.api.pipes.item.SpeedUpgrade;
-import aztech.modern_industrialization.items.FluidFuelItemHelper;
-import aztech.modern_industrialization.items.ForgeTool;
-import aztech.modern_industrialization.items.GuideBookItem;
-import aztech.modern_industrialization.items.SteamDrillItem;
+import aztech.modern_industrialization.items.*;
 import aztech.modern_industrialization.items.armor.GraviChestPlateItem;
 import aztech.modern_industrialization.items.armor.JetpackItem;
 import aztech.modern_industrialization.items.armor.QuantumArmorItem;
 import aztech.modern_industrialization.items.armor.RubberArmorMaterial;
+import aztech.modern_industrialization.items.biotech.FertilizerItem;
 import aztech.modern_industrialization.items.diesel_tools.DieselToolItem;
+import aztech.modern_industrialization.items.foods.MIFoodProperties;
 import aztech.modern_industrialization.items.tools.CrowbarItem;
 import aztech.modern_industrialization.items.tools.QuantumSword;
+import aztech.modern_industrialization.items.tools.SyringeItem;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
+
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.Tiers;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnstableApiUsage"})
 public final class MIItem {
 
     public static SortedMap<String, Item> items = new TreeMap<>();
@@ -80,6 +79,10 @@ public final class MIItem {
         return of(Item::new, id, maxCount, null, handheld);
     }
 
+    public static Item of(String id, FoodProperties foodProperties){
+        return of((item) -> new Item(new Item.Properties().food(foodProperties)), "foods/" + id, 64);
+    }
+
     public static <T extends Item> T of(Function<? super FabricItemSettings, T> ctor, String id, int maxCount) {
         return of(ctor, id, maxCount, null);
     }
@@ -93,12 +96,12 @@ public final class MIItem {
     }
 
     public static <T extends Item> T of(Function<? super FabricItemSettings, T> ctor, String id, int maxCount, Consumer<Item> registrationEvent,
-            boolean handheld) {
+                                        boolean handheld) {
         return of(ctor, id, maxCount, registrationEvent, handheld, Rarity.COMMON);
     }
 
     public static <T extends Item> T of(Function<? super FabricItemSettings, T> ctor, String id, int maxCount, Consumer<Item> registrationEvent,
-            boolean handheld, Rarity rarity) {
+                                        boolean handheld, Rarity rarity) {
         T item = ctor.apply((FabricItemSettings) new FabricItemSettings().stacksTo(maxCount).tab(ModernIndustrialization.ITEM_GROUP).rarity(rarity));
         if (items.put(id, item) != null) {
             throw new IllegalArgumentException("Item id already taken : " + id);
@@ -112,6 +115,38 @@ public final class MIItem {
         return item;
     }
 
+    // Item Categories
+
+    public static Item inAquaculture(String id){
+        return of("aquaculture/" + id);
+    }
+    public static Item inMycology(String id) {
+        return of("mycology/" + id);
+    }
+
+    public static Item ofGrainSpawn(String id) {
+        return inMycology(id + "_grain_spawn");
+    }
+    public static Item ofGrowBag(String id) {
+        return inMycology(id + "_grow_bag");
+    }
+    public static Item ofMushroom(String id) {
+        return inMycology(id);
+    }
+    public static Item ofFillet(String id) {
+        return of(id + "_fillet", MIFoodProperties.RAW_FILLET);
+    }
+    public static Item ofLive(String id) {
+        return inAquaculture(id + "_live");
+    }
+    public static Item ofRoe(String id) {
+        return inAquaculture(id + "_roe");
+    }
+    public static Item ofSample(String id) {
+        return of("samples/sample_" + id);
+    }
+
+    //<editor-fold desc="Base Items">
     public static final Item STEEL_UPGRADE = of("steel_upgrade");
 
     public static final Item ITEM_GUIDE_BOOK = of(GuideBookItem::new, "guidebook", 64);
@@ -215,34 +250,199 @@ public final class MIItem {
     public static final ForgeTool STEEL_HAMMER = new ForgeTool(ForgeTool.STEEL, "steel_hammer");
     public static final ForgeTool DIAMOND_HAMMER = new ForgeTool(Tiers.DIAMOND, "diamond_hammer");
     public static final ForgeTool NETHERITE_HAMMER = new ForgeTool(Tiers.NETHERITE, "netherite_hammer");
+        //</editor-fold>
 
     //Biotech
-    public static final Item ITEM_CALCITE_DUST = of("calcite_dust");
-    public static final Item ITEM_CALCIUM_CHLORIDE_DUST = of("calcium_chloride_dust");
-    public static final Item ITEM_CALCIUM_NITRATE_DUST = of("calcium_nitrate_dust");
-    public static final Item ITEM_CELLULOSE_FIBRES = of("cellulose_fibres");
-    public static final Item ITEM_PHOSPHORITE_DUST = of("phosphorite_dust");
-    public static final Item ITEM_TEST_TUBE = of("test_tube");
+//    public static final Item BEVERAGE_BOTTLE = of("beverage_bottle");
+    public static final Item CALCITE_DUST = of("calcite_dust");
+    public static final Item CALCIUM_CHLORIDE_DUST = of("calcium_chloride_dust");
+    public static final Item CALCIUM_NITRATE_DUST = of("calcium_nitrate_dust");
+    public static final Item COMPOST = of(FertilizerItem::new, "compost", 64,true);
+    public static final Item CRUSHED_LEAVES = of("crushed_leaves");
+    public static final Item PHOSPHORITE_DUST = of("phosphorite_dust");
+    public static final Item SYRINGE = of(SyringeItem::new, "syringe", 64, true);
+    public static final Item TEST_TUBE = of("test_tube");
+    public static final Item WAX = of("wax");
+    public static final Item WOOD_ASH = of("wood_ash");
 
-    //Biotech: Algae
+    //Agriculture
+    public static final Item STRAW = of("straw");
+    public static final Item SUNFLOWER_HULLS = of("sunflower_hulls");
+    public static final Item SUNFLOWER_SEEDS = of("sunflower_seeds");
+    public static final Item WHEAT_BRAN = of("wheat_bran");
+    public static final Item WHEAT_DOUGH = of("wheat_dough");
+    public static final Item WHEAT_FLOUR = of("wheat_flour");
+    public static final Item WHEAT_GRAIN = of("wheat_grain");
+    public static final Item WHEAT_WHOLE_FLOUR = of("wheat_whole_flour");
+
+    //Algology
     public static final Item BLUE_ALGAE = of("blue_algae");
     public static final Item BROWN_ALGAE = of("brown_algae");
     public static final Item GREEN_ALGAE = of("green_algae");
-    public static final Item RED_ALGAE = of("red_algae");
-    public static final Item YELLOW_ALGAE = of("yellow_algae");
+    public static final Item CELLULOSE_FIBRES = of("cellulose_fibres");
 
-    //Biotech: Samples
-    public static final Item SAMPLE_ALGAE_BLUE = of("sample_algae_blue");
-    public static final Item SAMPLE_ALGAE_BROWN = of("sample_algae_brown");
-    public static final Item SAMPLE_ALGAE_GREEN = of("sample_algae_green");
-    public static final Item SAMPLE_ALGAE_RED = of("sample_algae_red");
-    public static final Item SAMPLE_ALGAE_YELLOW = of("sample_algae_yellow");
-    public static final Item SAMPLE_BEEF = of("sample_beef");
-    public static final Item SAMPLE_CHICKEN = of("sample_chicken");
-    public static final Item SAMPLE_COD = of("sample_cod");
-    public static final Item SAMPLE_MUTTON = of("sample_mutton");
-    public static final Item SAMPLE_PORK = of("sample_pork");
-    public static final Item SAMPLE_SALMON = of("sample_salmon");
-    public static final Item SAMPLE_SQUID = of("sample_squid");
-    public static final Item SAMPLE_YEAST = of("sample_yeast");
+    //<editor-fold desc="Aquaculture">
+    public static final Item CRUSHED_FISH = inAquaculture("crushed_fish");
+    public static final Item FISH_FEED_CARNIVORE = inAquaculture("carnivorous_fish_feed");
+    public static final Item FISH_FEED_HERBIVORE = inAquaculture("herbivorous_fish_feed");
+    public static final Item FISH_MEAL = inAquaculture("fish_meal");
+    public static final Item FISH_NET = inAquaculture("fish_net");
+
+    //Seafood
+    public static final Item ANCHOVY = of("anchovy", MIFoodProperties.RAW_FISH);
+    public static final Item ANCHOVY_LIVE = ofLive("anchovy");
+    public static final Item ANCHOVY_ROE = ofRoe("anchovy");
+    public static final Item BRINE_SHRIMP = of("brine_shrimp", MIFoodProperties.RAW_FISH);
+    public static final Item BRINE_SHRIMP_LIVE = ofLive("brine_shrimp");
+    public static final Item BRINE_SHRIMP_ROE = ofRoe("brine_shrimp");
+    public static final Item CARP = of("carp", MIFoodProperties.RAW_FISH);
+    public static final Item CARP_LIVE = ofLive("carp");
+    public static final Item CARP_ROE = ofRoe("carp");
+    public static final Item CARP_FILLET = ofFillet("carp");
+    public static final Item CATFISH = of("catfish", MIFoodProperties.RAW_FISH);
+    public static final Item CATFISH_LIVE = ofLive("catfish");
+    public static final Item CATFISH_ROE = ofRoe("catfish");
+    public static final Item CATFISH_FILLET = ofFillet("catfish");
+    public static final Item COD = of("cod", MIFoodProperties.RAW_FISH);
+    public static final Item COD_LIVE = ofLive("cod");
+    public static final Item COD_ROE = ofRoe("cod");
+    public static final Item COD_FILLET = ofFillet("cod");
+    public static final Item HERRING = of("herring", MIFoodProperties.RAW_FISH);
+    public static final Item HERRING_LIVE = ofLive("herring");
+    public static final Item HERRING_ROE = ofRoe("herring");
+    public static final Item HERRING_FILLET = ofFillet("herring");
+    public static final Item MACKEREL = of("mackerel", MIFoodProperties.RAW_FISH);
+    public static final Item MACKEREL_LIVE = ofLive("mackerel");
+    public static final Item MACKEREL_ROE = ofRoe("mackerel");
+    public static final Item MACKEREL_FILLET = ofFillet("mackerel");
+    public static final Item POMFRET = of("pomfret", MIFoodProperties.RAW_FISH);
+    public static final Item POMFRET_LIVE = ofLive("pomfret");
+    public static final Item POMFRET_ROE = ofRoe("pomfret");
+    public static final Item POMFRET_FILLET = ofFillet("pomfret");
+    public static final Item SALMON = of("salmon", MIFoodProperties.RAW_FISH);
+    public static final Item SALMON_LIVE = ofLive("salmon");
+    public static final Item SALMON_ROE = ofRoe("salmon");
+    public static final Item SALMON_FILLET = ofFillet("salmon");
+    public static final Item SARDINE = of("sardine", MIFoodProperties.RAW_FISH);
+    public static final Item SARDINE_LIVE = ofLive("sardine");
+    public static final Item SARDINE_ROE = ofRoe("sardine");
+    public static final Item SARDINE_FILLET = ofFillet("sardine");
+    public static final Item SHRIMP = of("shrimp", MIFoodProperties.RAW_FISH);
+    public static final Item SHRIMP_LIVE = ofLive("shrimp");
+    public static final Item SHRIMP_ROE = ofRoe("shrimp");
+    public static final Item SKIPJACK_TUNA = of("skipjack_tuna", MIFoodProperties.RAW_FISH);
+    public static final Item SKIPJACK_TUNA_LIVE = ofLive("skipjack_tuna");
+    public static final Item SKIPJACK_TUNA_ROE = ofRoe("skipjack_tuna");
+    public static final Item SKIPJACK_TUNA_FILLET = ofFillet("skipjack_tuna");
+    public static final Item STINGRAY = of("stingray", MIFoodProperties.RAW_FISH);
+    public static final Item STINGRAY_LIVE = ofLive("stingray");
+    public static final Item STINGRAY_ROE = ofRoe("stingray");
+    public static final Item STINGRAY_FILLET = ofFillet("stingray");
+    public static final Item TILAPIA = of("tilapia", MIFoodProperties.RAW_FISH);
+    public static final Item TILAPIA_LIVE = ofLive("tilapia");
+    public static final Item TILAPIA_ROE = ofRoe("tilapia");
+    public static final Item TILAPIA_FILLET = ofFillet("tilapia");
+    public static final Item YELLOWFIN_TUNA = of("yellowfin_tuna", MIFoodProperties.RAW_FISH);
+    public static final Item YELLOWFIN_TUNA_LIVE = ofLive("yellowfin_tuna");
+    public static final Item YELLOWFIN_TUNA_ROE = ofRoe("yellowfin_tuna");
+    public static final Item YELLOWFIN_TUNA_FILLET = ofFillet("yellowfin_tuna");
+    //</editor-fold>
+
+    //Food
+    public static final Item ALGAE_BAR = of("algae_bar", MIFoodProperties.ALGAE_BAR);
+    public static final Item ALGAE_MIX = of("algae_mix");
+    public static final Item COOKED_SALMON_FILLET = of("cooked_salmon_fillet", MIFoodProperties.COOKED_SALMON_FILLET);
+    public static final Item SALTED_BEEF = of("salted_beef", MIFoodProperties.SALTED_BEEF);
+    public static final Item SALTED_MUTTON = of("salted_mutton", MIFoodProperties.SALTED_MUTTON);
+    public static final Item SALTED_PORK = of("salted_pork", MIFoodProperties.SALTED_PORK);
+
+    //<editor-fold desc="Mycology">
+    public static final Item GROW_BAG = inMycology("mushroom_grow_bag");
+    public static final Item STERILIZED_GRAIN = inMycology("sterilized_grain");
+
+    //Mycology: Mushrooms
+    public static final Item BAMBOO_MUSHROOM = ofMushroom("bamboo_mushroom");
+    public static final Item BAMBOO_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("bamboo_mushroom");
+    public static final Item BAMBOO_MUSHROOM_GROW_BAG = ofGrowBag("bamboo_mushroom");
+    public static final Item BAMBOO_MUSHROOM_SPORE_SAMPLE = ofSample("bamboo_mushroom");
+    public static final Item BEECH_MUSHROOM = ofMushroom("beech_mushroom");
+    public static final Item BEECH_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("beech_mushroom");
+    public static final Item BEECH_MUSHROOM_GROW_BAG = ofGrowBag("beech_mushroom");
+    public static final Item BEECH_MUSHROOM_SPORE_SAMPLE = ofSample("beech_mushroom");
+    public static final Item BROWN_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("brown_mushroom");
+    public static final Item BROWN_MUSHROOM_GROW_BAG = ofGrowBag("brown_mushroom");
+    public static final Item BROWN_MUSHROOM_SPORE_SAMPLE = ofSample("brown_mushroom");
+    public static final Item BUTTON_MUSHROOM = ofMushroom("button_mushroom");
+    public static final Item BUTTON_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("button_mushroom");
+    public static final Item BUTTON_MUSHROOM_GROW_BAG = ofGrowBag("button_mushroom");
+    public static final Item BUTTON_MUSHROOM_SPORE_SAMPLE = ofSample("button_mushroom");
+    public static final Item ENOKITAKE_MUSHROOM = ofMushroom("enokitake_mushroom");
+    public static final Item ENOKITAKE_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("enokitake_mushroom");
+    public static final Item ENOKITAKE_MUSHROOM_GROW_BAG = ofGrowBag("enokitake_mushroom");
+    public static final Item ENOKITAKE_MUSHROOM_SPORE_SAMPLE = ofSample("enokitake_mushroom");
+    public static final Item ESSENCE_MUSHROOM = ofMushroom("essence_mushroom");
+    public static final Item ESSENCE_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("essence_mushroom");
+    public static final Item ESSENCE_MUSHROOM_GROW_BAG = ofGrowBag("essence_mushroom");
+    public static final Item ESSENCE_MUSHROOM_SPORE_SAMPLE = ofSample("essence_mushroom");
+    public static final Item MAITAKE_MUSHROOM = ofMushroom("maitake_mushroom");
+    public static final Item MAITAKE_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("maitake_mushroom");
+    public static final Item MAITAKE_MUSHROOM_GROW_BAG = ofGrowBag("maitake_mushroom");
+    public static final Item MAITAKE_MUSHROOM_SPORE_SAMPLE = ofSample("maitake_mushroom");
+    public static final Item NETHER_WART_GRAIN_SPAWN = ofGrainSpawn("nether_wart");
+    public static final Item NETHER_WART_GROW_BAG = ofGrowBag("nether_wart");
+    public static final Item NETHER_WART_SPORE_SAMPLE = ofSample("nether_wart");
+    public static final Item OYSTER_MUSHROOM = ofMushroom("oyster_mushroom");
+    public static final Item OYSTER_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("oyster_mushroom");
+    public static final Item OYSTER_MUSHROOM_GROW_BAG = ofGrowBag("oyster_mushroom");
+    public static final Item OYSTER_MUSHROOM_SPORE_SAMPLE = ofSample("oyster_mushroom");
+    public static final Item PORTABELLA_MUSHROOM = ofMushroom("portabella_mushroom");
+    public static final Item PORTABELLA_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("portabella_mushroom");
+    public static final Item PORTABELLA_MUSHROOM_GROW_BAG = ofGrowBag("portabella_mushroom");
+    public static final Item PORTABELLA_MUSHROOM_SPORE_SAMPLE = ofSample("portabella_mushroom");
+    public static final Item RED_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("red_mushroom");
+    public static final Item RED_MUSHROOM_GROW_BAG = ofGrowBag("red_mushroom");
+    public static final Item RED_MUSHROOM_SPORE_SAMPLE = ofSample("red_mushroom");
+    public static final Item ROPE_MUSHROOM = ofMushroom("rope_mushroom");
+    public static final Item ROPE_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("rope_mushroom");
+    public static final Item ROPE_MUSHROOM_GROW_BAG = ofGrowBag("rope_mushroom");
+    public static final Item ROPE_MUSHROOM_SPORE_SAMPLE = ofSample("rope_mushroom");
+    public static final Item SHIITAKE_MUSHROOM = ofMushroom("shiitake_mushroom");
+    public static final Item SHIITAKE_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("shiitake_mushroom");
+    public static final Item SHIITAKE_MUSHROOM_GROW_BAG = ofGrowBag("shiitake_mushroom");
+    public static final Item SHIITAKE_MUSHROOM_SPORE_SAMPLE = ofSample("shiitake_mushroom");
+    public static final Item SNOW_MUSHROOM = ofMushroom("snow_mushroom");
+    public static final Item SNOW_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("snow_mushroom");
+    public static final Item SNOW_MUSHROOM_GROW_BAG = ofGrowBag("snow_mushroom");
+    public static final Item SNOW_MUSHROOM_SPORE_SAMPLE = ofSample("snow_mushroom");
+    public static final Item SPLITGILL_MUSHROOM = ofMushroom("splitgill_mushroom");
+    public static final Item SPLITGILL_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("splitgill_mushroom");
+    public static final Item SPLITGILL_MUSHROOM_GROW_BAG = ofGrowBag("splitgill_mushroom");
+    public static final Item SPLITGILL_MUSHROOM_SPORE_SAMPLE = ofSample("splitgill_mushroom");
+    public static final Item STRAW_MUSHROOM = ofMushroom("straw_mushroom");
+    public static final Item STRAW_MUSHROOM_GRAIN_SPAWN = ofGrainSpawn("straw_mushroom");
+    public static final Item STRAW_MUSHROOM_GROW_BAG = ofGrowBag("straw_mushroom");
+    public static final Item STRAW_MUSHROOM_SPORE_SAMPLE = ofSample("straw_mushroom");
+    //</editor-fold>
+
+    public static final Item YEAST = of("yeast");
+
+    //Samples
+    public static final Item SAMPLE_BLOOD = ofSample("blood");
+    public static final Item SAMPLE_BLUE_ALGAE = ofSample("blue_algae");
+    public static final Item SAMPLE_BROWN_ALGAE = ofSample("brown_algae");
+    public static final Item SAMPLE_GREEN_ALGAE = ofSample("green_algae");
+    public static final Item SAMPLE_AMYLASE = ofSample("amylase");
+    public static final Item SAMPLE_BEEF = ofSample("beef");
+    public static final Item SAMPLE_CHICKEN = ofSample("chicken");
+    public static final Item SAMPLE_COD = ofSample("cod");
+    public static final Item SAMPLE_MUTTON = ofSample("mutton");
+    public static final Item SAMPLE_PORK = ofSample("pork");
+    public static final Item SAMPLE_RABBIT = ofSample("rabbit");
+    public static final Item SAMPLE_SALMON = ofSample("salmon");
+    public static final Item SAMPLE_SPIDER = ofSample("spider");
+    public static final Item SAMPLE_SQUID = ofSample("squid");
+    public static final Item SAMPLE_YEAST = ofSample("yeast");
+
+    //Templates
+    public static final Item ITEM_INDUSTRIAL_OVEN_LOAF_TEMPLATE = of("industrial_oven_loaf_template");
 }

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ifh",
+    "sss",
+    "mfm"
+  ],
+  "key": {
+    "m": {
+      "item": "modern_industrialization:motor"
+    },
+    "h": {
+      "item": "modern_industrialization:basic_machine_hull"
+    },
+    "s": {
+      "item": "modern_industrialization:steel_mesh"
+    },
+    "f": {
+      "tag": "modern_industrialization:fluid_pipes"
+    },
+    "i": {
+      "tag": "modern_industrialization:item_pipes"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:filter",
+    "count": 1
+  }
+}

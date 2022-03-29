@@ -49,10 +49,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
+import org.jetbrains.annotations.NotNull;
 
 // @formatter:off
 @SuppressWarnings("rawtypes")
@@ -79,10 +81,21 @@ public class MultiblockMachines {
     public static BlockEntityType FUSION_REACTOR;
     public static BlockEntityType PLASMA_TURBINE;
 
+    //Biotech
+    public static BlockEntityType AQUACULTURE_POND;
+    public static BlockEntityType COMPOSTER;
+    public static BlockEntityType GROWTH_CHAMBER;
+    public static BlockEntityType INDUSTRIAL_OVEN;
+    public static BlockEntityType INDUSTRIAL_PRESS;
+    public static BlockEntityType TREE_PLANTER;
+
     private static SimpleMember invarCasings;
 
     private static SimpleMember bronzePlatedBricks;
     private static SimpleMember bronzePipe;
+
+    private static SimpleMember steelCasing;
+    private static SimpleMember steelPipe;
 
     private static SimpleMember frostproofMachineCasing;
 
@@ -105,7 +118,75 @@ public class MultiblockMachines {
     private static final HatchFlags energyOutput = new HatchFlags.Builder().with(ENERGY_OUTPUT).build();
     private static final HatchFlags energyInput = new HatchFlags.Builder().with(ENERGY_INPUT).build();
 
+    //Shape Placement Methods
+    private static void addSideX(@NotNull ShapeTemplate.Builder builder, int x1, int x2, int y, int z
+            , SimpleMember simpleMember, HatchFlags hatchFlags){
+        builder.add(x1, y, z, simpleMember, hatchFlags);
+        builder.add(x2, y, z, simpleMember, hatchFlags);
+    }
 
+    private static void addSideZ(@NotNull ShapeTemplate.Builder builder, int x, int y, int z1, int z2
+            , SimpleMember simpleMember, HatchFlags hatchFlags){
+        builder.add(x, y, z1, simpleMember, hatchFlags);
+        builder.add(x, y, z2, simpleMember, hatchFlags);
+    }
+
+    private static void addPlane(ShapeTemplate.Builder builder, int x1, int x2, int y, int z1, int z2
+            , SimpleMember simpleMember, HatchFlags hatchFlags){
+        int placeholder;
+        if (x1 > x2){
+            placeholder = x1;
+            x1 = x2;
+            x2 = placeholder;
+        }
+        if (z1 > z2){
+            placeholder = z1;
+            z1 = z2;
+            z2 = placeholder;
+        }
+
+        for(int x = x1; x <= x2; x++){
+            for(int z = z1; z <= z2; z++){
+                builder.add(x, y, z, simpleMember, hatchFlags);
+            }
+        }
+    }
+
+    private static void addRectangle(ShapeTemplate.Builder builder, int x1, int x2, int y, int z1, int z2
+            , SimpleMember simpleMember, HatchFlags hatchFlags){
+        int placeholder;
+
+        if (x1 > x2){
+            placeholder = x1;
+            x1 = x2;
+            x2 = placeholder;
+        }
+        if (z1 > z2){
+            placeholder = z1;
+            z1 = z2;
+            z2 = placeholder;
+        }
+
+        for(int x = x1; x <= x2; x++){
+            builder.add(x, y, z1, simpleMember, hatchFlags);
+            if(z1 != z2){
+                builder.add(x, y, z2, simpleMember, hatchFlags);
+            }
+        }
+
+        if((z2 - z1) >= 3){
+            for(int z = (z1 + 1); z <= (z2 - 1); z++){
+                builder.add(x1, y, z, simpleMember, hatchFlags);
+                if (x1 != x2){
+                    builder.add(x2, y, z, simpleMember, hatchFlags);
+                }
+            }
+        }
+    }
+
+
+
+    //Multiblock Shapes
     private static void cokeOven() {
         SimpleMember bricks = SimpleMember.forBlock(Blocks.BRICKS);
         HatchFlags cokeOvenHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT).with(FLUID_INPUT).with(FLUID_OUTPUT).build();
@@ -189,8 +270,6 @@ public class MultiblockMachines {
     }
 
     private static void quarries() {
-        SimpleMember steelCasing = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing"));
-        SimpleMember steelPipe = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing_pipe"));
         HatchFlags quarryHatchFlags = new HatchFlags.Builder().with(ITEM_INPUT, FLUID_INPUT, ITEM_OUTPUT).build();
         HatchFlags quarryElectricHatchFlags = new HatchFlags.Builder().with(ITEM_INPUT, ITEM_OUTPUT, ENERGY_INPUT).build();
 
@@ -229,8 +308,6 @@ public class MultiblockMachines {
 
     private static void oilDrillingRig() {
         ShapeTemplate.Builder oilDrillingRigShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STEEL);
-        SimpleMember steelCasing = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing"));
-        SimpleMember steelPipe = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing_pipe"));
         SimpleMember chain = SimpleMember.verticalChain();
         HatchFlags hatchFlags = new HatchFlags.Builder().with(ITEM_INPUT).with(FLUID_OUTPUT).with(ENERGY_INPUT).build();
         // pillars
@@ -351,7 +428,7 @@ public class MultiblockMachines {
         ReiMachineRecipes.registerMultiblockShape("large_steam_turbine", largeSteamTurbineShape);
     }
 
-    private static void heathExchanger() {
+    private static void heatExchanger() {
         ShapeTemplate.Builder heatExchangerShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STAINLESS_STEEL_PIPE);
         for (int z = 0; z < 5; z++) {
             for (int x = -1; x <= 1; x++) {
@@ -526,12 +603,291 @@ public class MultiblockMachines {
         ReiMachineRecipes.registerMultiblockShape("plasma_turbine", plasmaTurbineShape);
     }
 
+    //Biotech
+    public static void aquaculturePond(){
+        ShapeTemplate.Builder aquaculturePondShapeBuilder = new ShapeTemplate.Builder(MachineCasings.RUBBER);
+        SimpleMember rubber = SimpleMember.forBlock(MIBlock.RUBBER_BLOCK);
+        SimpleMember water = SimpleMember.forBlock(Blocks.WATER);
+        HatchFlags aquaculturePondHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT).with(FLUID_INPUT).with(FLUID_OUTPUT)
+                .with(ENERGY_INPUT).build();
+        //Base
+
+        addPlane(aquaculturePondShapeBuilder, -2, 2, -3, 0, 4, rubber, null);
+
+        //Water
+        for (int y = -2; y <= -1; y++){
+            addPlane(aquaculturePondShapeBuilder, -1, 1, y, 1, 3, water, null);
+        }
+
+        //Walls
+        for (int y = -2; y <= -1; y++){
+            addRectangle(aquaculturePondShapeBuilder, -2, 2, y, 0, 4, rubber, null);
+        }
+
+        //Top
+        for (int z = 0; z <= 4; z++){
+            addSideX(aquaculturePondShapeBuilder, -2, 2, 0, z, rubber, aquaculturePondHatches);
+        }
+        addRectangle(aquaculturePondShapeBuilder, -1, 1, 0, 4, 4, rubber, aquaculturePondHatches);
+        addSideX(aquaculturePondShapeBuilder, -1, 1, 0, 0, rubber, aquaculturePondHatches);
+
+        ShapeTemplate aquaculturePondShape = aquaculturePondShapeBuilder.build();
+        AQUACULTURE_POND = MachineRegistrationHelper.registerMachine("aquaculture_pond",
+                bet -> new ElectricCraftingMultiblockBlockEntity(bet, "aquaculture_pond", aquaculturePondShape, MIMachineRecipeTypes.AQUACULTURE_POND));
+        ReiMachineRecipes.registerMultiblockShape("aquaculture_pond", aquaculturePondShape);
+    }
+
+    public static void composter(){
+        ShapeTemplate.Builder composterShapeBuilder = new ShapeTemplate.Builder(MachineCasings.RUBBER);
+        HatchFlags composterHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT)
+                .with(FLUID_INPUT).with(FLUID_OUTPUT).build();
+
+        SimpleMember rubber = SimpleMember.forBlock(MIBlock.RUBBER_BLOCK);
+
+        //TopBottom
+        addRectangle(composterShapeBuilder, -1, 1, 2, 0, 2, rubber, composterHatches);
+        composterShapeBuilder.add(0, 2, 1, steelPipe, null);
+        addRectangle(composterShapeBuilder, -1, 1, -1, 0, 2, rubber, composterHatches);
+        composterShapeBuilder.add(0, -1, 1, rubber, null);
+
+        //Body
+        composterShapeBuilder.add(0, 1, 0, rubber, null);
+        for (int y = 0; y <= 1; y++){
+            composterShapeBuilder.add(0, y, 2, steelPipe, null);
+            addSideX(composterShapeBuilder, -1, 1, y, 0, rubber, null);
+            addSideX(composterShapeBuilder, -1, 1, y, 1, steelPipe, null);
+            addSideX(composterShapeBuilder, -1, 1, y, 2, rubber, null);
+        }
+
+        ShapeTemplate composterShape = composterShapeBuilder.build();
+        COMPOSTER = MachineRegistrationHelper.registerMachine("composter", bet -> new SteamCraftingMultiblockBlockEntity(
+                bet, "composter", composterShape, MIMachineRecipeTypes.COMPOSTER));
+        ReiMachineRecipes.registerMultiblockShape("composter", composterShape);
+    }
+
+    public static void growthChamber(){
+        ShapeTemplate.Builder growthChamberShapeBuilder = new ShapeTemplate.Builder(MachineCasings.BRICKS);
+        SimpleMember bricks = SimpleMember.forBlock(Blocks.BRICKS);
+        SimpleMember tintedGlass = SimpleMember.forBlock(Blocks.TINTED_GLASS);
+        HatchFlags growthChamberHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT).with(FLUID_INPUT)
+                .with(ENERGY_INPUT).build();
+
+        //Base
+        for (int x = -2; x <= 2; x++){
+            addSideZ(growthChamberShapeBuilder, x, -1, 0, 4, bricks, growthChamberHatches);
+            growthChamberShapeBuilder.add(x, 0, 4, bricks, null);
+            if(x != 0){
+                growthChamberShapeBuilder.add(x, 0, 0, bricks, null);
+            }
+        }
+        for (int z = 1; z <= 3; z++){
+            addSideX(growthChamberShapeBuilder, -2, 2, -1, z, bricks, growthChamberHatches);
+            addSideX(growthChamberShapeBuilder, -2, 2, 0, z, tintedGlass, null);
+        }
+
+        //Glass
+        for (int y = 1; y <= 3; y++){
+            addRectangle(growthChamberShapeBuilder, -2, 2, y, 0, 4, tintedGlass, null);
+        }
+
+        //Top
+        addPlane(growthChamberShapeBuilder, -1, 1, 3, 1, 3, tintedGlass, null);
+
+        ShapeTemplate growthChamberShape = growthChamberShapeBuilder.build();
+        GROWTH_CHAMBER = MachineRegistrationHelper.registerMachine("growth_chamber",
+                bet -> new ElectricCraftingMultiblockBlockEntity(bet, "growth_chamber", growthChamberShape,
+                        MIMachineRecipeTypes.GROWTH_CHAMBER));
+        ReiMachineRecipes.registerMultiblockShape("growth_chamber", growthChamberShape);
+    }
+
+    public static void industrialOven(){
+        ShapeTemplate.Builder industrialOvenShapeBuilder = new ShapeTemplate.Builder(MachineCasings.BRICKS);
+        SimpleMember bricks = SimpleMember.forBlock(Blocks.BRICKS);
+        SimpleMember heatedStone = SimpleMember.forBlock(MIBlock.HEATING_ELEMENT);
+        HatchFlags industrialOvenHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT)
+                .with(ENERGY_INPUT).build();
+
+        //Top
+        addPlane(industrialOvenShapeBuilder, 0, 3, 1, 0, 3, bricks, null);
+
+        //Middle
+        for(int x = 0; x <= 3; x++){
+            industrialOvenShapeBuilder.add(x, 0, 3, bricks, null);
+        }
+        for(int z = 1; z <= 2; z++){
+            industrialOvenShapeBuilder.add(0, 0, z, bricks, industrialOvenHatches);
+            industrialOvenShapeBuilder.add(3, 0, z, bricks, industrialOvenHatches);
+        }
+        industrialOvenShapeBuilder.add(0, 0, 3, bricks, null);
+
+        //Bottom
+        for(int x = 0; x <= 3; x++){
+            industrialOvenShapeBuilder.add(x, -1, 3, bricks, industrialOvenHatches);
+            industrialOvenShapeBuilder.add(x, -1, 0, bricks, industrialOvenHatches);
+        }
+        for(int z = 1; z <= 2; z++){
+            industrialOvenShapeBuilder.add(0, -1, z, bricks, industrialOvenHatches);
+            industrialOvenShapeBuilder.add(3, -1, z, bricks, industrialOvenHatches);
+        }
+        for(int x = 1; x <= 2; x++){
+            for(int z = 1; z <= 2; z++){
+                industrialOvenShapeBuilder.add(x, -1, z, heatedStone,null);
+            }
+        }
+
+        ShapeTemplate industrialOvenShape = industrialOvenShapeBuilder.build();
+        INDUSTRIAL_OVEN = MachineRegistrationHelper.registerMachine("industrial_oven",
+                bet -> new ElectricCraftingMultiblockBlockEntity(bet, "industrial_oven", industrialOvenShape,
+                        MIMachineRecipeTypes.INDUSTRIAL_OVEN));
+        ReiMachineRecipes.registerMultiblockShape("industrial_oven", industrialOvenShape);
+    }
+
+    public static void industrialPress(){
+        ShapeTemplate.Builder industrialPressShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STEEL);
+        HatchFlags topHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT).with(ENERGY_INPUT).build();
+        HatchFlags baseHatches = new HatchFlags.Builder().with(FLUID_INPUT).with(FLUID_OUTPUT).build();
+
+        SimpleMember glass = SimpleMember.forBlock(Blocks.GLASS);
+        SimpleMember steelCasing = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing"));
+        SimpleMember steelPipe = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing_pipe"));
+        SimpleMember cauldron = SimpleMember.forBlock(Blocks.CAULDRON);
+
+        //Components
+        for(int y = 3; y <= 5; y++){
+            industrialPressShapeBuilder.add(0, y, 1, steelPipe);
+        }
+        industrialPressShapeBuilder.add(0, 0, 1, cauldron);
+
+        //Press
+        for(int y = 3; y <= 5; y++){
+            addRectangle(industrialPressShapeBuilder, -1, 1, y, 0, 2, steelCasing, topHatches);
+        }
+        for(int y = 1; y <= 2; y++){
+            addRectangle(industrialPressShapeBuilder, -1, 1, y, 0, 2, glass, null);
+        }
+
+        //Base
+        for(int y = 0; y <= 5; y++){
+            addSideX(industrialPressShapeBuilder, -2, 2, y, 1, bronzePlatedBricks, null);
+        }
+        for(int z = 0; z <= 3; z++){
+            if(z != 1){
+                addSideX(industrialPressShapeBuilder, -1, 1, 0, z, steelCasing, null);
+            }
+        }
+        for(int z = -1; z <= 0; z++){
+            addSideX(industrialPressShapeBuilder, -2, 2, 0, z, steelCasing, null);
+        }
+        addSideX(industrialPressShapeBuilder, -1, 1, 0, 0, steelCasing, null);
+        addSideX(industrialPressShapeBuilder, -2, 2, 1, 0, steelCasing, null);
+        addSideX(industrialPressShapeBuilder, -2, 2, 0, 2, steelCasing, null);
+        addSideX(industrialPressShapeBuilder, -1, 1, 0, 1, steelCasing, baseHatches);
+        industrialPressShapeBuilder.add(0, 0, 2, steelCasing, baseHatches);
+
+        ShapeTemplate industrialPressShape = industrialPressShapeBuilder.build();
+        INDUSTRIAL_PRESS = MachineRegistrationHelper.registerMachine("industrial_press",
+                bet -> new ElectricCraftingMultiblockBlockEntity(bet, "industrial_press", industrialPressShape,
+                        MIMachineRecipeTypes.INDUSTRIAL_PRESS));
+        ReiMachineRecipes.registerMultiblockShape("industrial_press", industrialPressShape);
+    }
+
+    public static void treePlanter(){
+        ShapeTemplate.Builder treePlanterShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STEEL);
+        HatchFlags treePlanterHatches = new HatchFlags.Builder().with(ITEM_INPUT).with(ITEM_OUTPUT).with(FLUID_INPUT)
+                .with(FLUID_OUTPUT).with(ENERGY_INPUT).build();
+        SimpleMember greenGlass = SimpleMember.forBlock(Blocks.GREEN_STAINED_GLASS);
+        SimpleMember grass = SimpleMember.forBlock(Blocks.GRASS_BLOCK);
+
+        //base
+        for (int x = -4; x <= 4; x++){
+            if (x != 0) {
+                addSideZ(treePlanterShapeBuilder, x, 0, 0, 16, steelCasing, treePlanterHatches);
+            }
+            else{
+                treePlanterShapeBuilder.add(x, 0, 16, steelCasing, treePlanterHatches);
+            }
+        }
+        for (int z = 4; z <= 12; z++){
+            addSideX(treePlanterShapeBuilder,-8,8,0, z, steelCasing, treePlanterHatches);
+        }
+        for (int z = 1; z <= 3; z++){    //diagonals
+            addSideX(treePlanterShapeBuilder, -(4+z), (4+z), 0, z, steelCasing, null);
+            addSideX(treePlanterShapeBuilder, -(4+z), (4+z), 0, (16 - z), steelCasing, null);
+        }
+
+        //walls
+        for(int y = 1; y <= 8; y++){
+            for(int x = -3; x <= 3; x++){
+                addSideZ(treePlanterShapeBuilder, x, y, 0, 16, greenGlass, null);
+            }
+            for(int z = 5; z <= 11; z++){
+                if(y <= 3){
+                    if(z < 7 || z > 9){
+                        addSideX(treePlanterShapeBuilder, -8, 8, y, z, greenGlass, null);
+                    }
+                    else if(z == 7 || z == 9){
+                        addSideX(treePlanterShapeBuilder, -8, 8, y, z, steelCasing, null);
+                    }
+                }
+                else {
+                    addSideX(treePlanterShapeBuilder, -8, 8, y, z, greenGlass, null);
+                }
+            }
+            addSideZ(treePlanterShapeBuilder, -4, y, 0, 16, steelPipe, null);
+            addSideZ(treePlanterShapeBuilder, 4, y, 0, 16, steelPipe, null);
+            addSideX(treePlanterShapeBuilder, -8, 8, y, 12, steelPipe, null);
+            addSideX(treePlanterShapeBuilder, -8, 8, y, 4, steelPipe, null);
+            for (int z = 1; z <= 3; z++){    //diagonals
+                addSideX(treePlanterShapeBuilder, -(4+z), (4+z), y, z, greenGlass, null);
+                addSideX(treePlanterShapeBuilder, -(4+z), (4+z), y, (16 - z), greenGlass, null);
+            }
+        }
+        addSideX(treePlanterShapeBuilder, -8, 8, 3, 8, steelCasing, null);
+
+        //roof
+        for (int i = 1; i <= 3; i++){
+            addSideZ(treePlanterShapeBuilder, -4, (7 + i), i, (16 - i), steelCasing, null);
+            addSideZ(treePlanterShapeBuilder, -4, (8 + i), i, (16 - i), steelCasing, null);
+            addSideZ(treePlanterShapeBuilder, 4, (7 + i), i, (16 - i), steelCasing, null);
+            addSideZ(treePlanterShapeBuilder, 4, (8 + i), i, (16 - i), steelCasing, null);
+            for (int x = -3; x <= 3; x++){
+                addSideZ(treePlanterShapeBuilder, x, (8 + i), i, (16 - i), greenGlass, null);
+            }
+            addSideX(treePlanterShapeBuilder, -(8 - i), (8 - i), (7 + i), 4, steelCasing, null);
+            addSideX(treePlanterShapeBuilder, -(8 - i), (8 - i), (8 + i), 4, steelCasing, null);
+            addSideX(treePlanterShapeBuilder, -(8 - i), (8 - i), (7 + i), 12, steelCasing, null);
+            addSideX(treePlanterShapeBuilder, -(8 - i), (8 - i), (8 + i), 12, steelCasing, null);
+            for (int z = 5; z <= 11; z++){
+                addSideX(treePlanterShapeBuilder, -(8 - i), (8 - i), (8 + i), z, greenGlass, null);
+            }
+            for (int z = 1; z <= (4 - i); z++){    //diagonals
+                addSideX(treePlanterShapeBuilder, -(9 - z - i), (9 - z - i), (8 + i), (4 - z), greenGlass, null);
+                addSideX(treePlanterShapeBuilder, -(9 - z - i), (9 - z - i), (8 + i), (12 + z), greenGlass, null);
+            }
+        }
+        addSideX(treePlanterShapeBuilder, -4, 4, 11, 4, steelCasing, null);
+        addSideX(treePlanterShapeBuilder, -4, 4, 11, 12, steelCasing, null);
+        addRectangle(treePlanterShapeBuilder, -4, 4, 12, 4, 12, steelCasing, null);
+        addPlane(treePlanterShapeBuilder, -3, 3, 12, 5, 11, greenGlass, null);
+
+        ShapeTemplate treePlanterShape = treePlanterShapeBuilder.build();
+        TREE_PLANTER = MachineRegistrationHelper.registerMachine("tree_planter",
+                bet -> new ElectricCraftingMultiblockBlockEntity(bet, "tree_planter", treePlanterShape,
+                        MIMachineRecipeTypes.TREE_PLANTER));
+        ReiMachineRecipes.registerMultiblockShape("tree_planter", treePlanterShape);
+    }
+
+
+
     public static void init() {
 
         invarCasings = SimpleMember.forBlock(MIBlock.blocks.get("heatproof_machine_casing"));
 
         bronzePlatedBricks = SimpleMember.forBlock(MIBlock.blocks.get("bronze_plated_bricks"));
         bronzePipe = SimpleMember.forBlock(MIBlock.blocks.get("bronze_machine_casing_pipe"));
+
+        steelCasing = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing"));
+        steelPipe = SimpleMember.forBlock(MIBlock.blocks.get("steel_machine_casing_pipe"));
 
         frostproofMachineCasing = SimpleMember.forBlock(MIBlock.blocks.get("frostproof_machine_casing"));
 
@@ -543,12 +899,12 @@ public class MultiblockMachines {
 
         blastProofCasing = SimpleMember.forBlock(MIBlock.blocks.get("blastproof_casing"));
 
-
         highlyAdvancedHull = SimpleMember.forBlock(MIBlock.blocks.get("highly_advanced_machine_hull"));
         fusionChamber = SimpleMember.forBlock(MIBlock.blocks.get("fusion_chamber"));
 
         plasmaHandlingIridium = SimpleMember.forBlock(MIBlock.blocks.get("plasma_handling_iridium_machine_casing"));
         iridiumPipe = SimpleMember.forBlock(MIBlock.blocks.get("iridium_machine_casing_pipe"));
+
 
         cokeOven();
         steamBlastFurnace();
@@ -560,13 +916,21 @@ public class MultiblockMachines {
         distillationTower();
         largeDieselGenerator();
         largeSteamTurbine();
-        heathExchanger();
+        heatExchanger();
         pressurizer();
         implosionCompressor();
         nuclearReactor();
         largeTank();
         fusionReactor();
         plasmaTurbine();
+
+        //Biotech
+        aquaculturePond();
+        composter();
+        growthChamber();
+        industrialOven();
+        industrialPress();
+        treePlanter();
     }
 
 
@@ -684,6 +1048,56 @@ public class MultiblockMachines {
         MachineModels.addTieredMachine("plasma_turbine", "steam_turbine",
                 MachineCasings.PLASMA_HANDLING_IRIDIUM, true, false, false);
         BlockEntityRendererRegistry.INSTANCE.register(PLASMA_TURBINE, MultiblockMachineBER::new);
+
+        //Biotech
+        MachineModels.addTieredMachine("aquaculture_pond",
+                "aquaculture_pond", MachineCasings.RUBBER, true, false, true, true);
+        BlockEntityRendererRegistry.INSTANCE.register(AQUACULTURE_POND, MultiblockMachineBER::new);
+        new Rei("aquaculture_pond", MIMachineRecipeTypes.AQUACULTURE_POND, new ProgressBar.Parameters(77, 33, "arrow"))
+                .items(inputs -> inputs.addSlots(56, 35, 2, 1), outputs -> outputs.addSlots(102, 35, 2, 1))
+                .fluids(inputs -> inputs.addSlots(36, 35, 2, 1), outputs -> outputs.addSlots(122, 35, 2, 1))
+                .register();
+
+        MachineModels.addTieredMachine("composter",
+                "composter", MachineCasings.RUBBER, true, false, false, true);
+        BlockEntityRendererRegistry.INSTANCE.register(COMPOSTER, MultiblockMachineBER::new);
+        new Rei("composter", MIMachineRecipeTypes.COMPOSTER, new ProgressBar.Parameters(77, 33, "arrow"))
+                .items(inputs -> inputs.addSlots(56, 35, 2, 1), outputs -> outputs.addSlot(102, 35))
+                .fluids(inputs -> inputs.addSlot(36, 35), outputs -> outputs.addSlot(122, 35))
+                .register();
+
+        MachineModels.addTieredMachine("growth_chamber",
+                "growth_chamber", MachineCasings.BRICKS, true, false, false, true);
+        BlockEntityRendererRegistry.INSTANCE.register(GROWTH_CHAMBER, MultiblockMachineBER::new);
+        new Rei("growth_chamber", MIMachineRecipeTypes.GROWTH_CHAMBER, new ProgressBar.Parameters(77, 33, "arrow"))
+                .items(inputs -> inputs.addSlot(56, 35), outputs -> outputs.addSlot(102, 35))
+                .fluids(inputs -> inputs.addSlot(36, 35), outputs -> {})
+                .register();
+
+        MachineModels.addTieredMachine("industrial_oven",
+                "industrial_oven", MachineCasings.BRICKS, true, false, false, true);
+        BlockEntityRendererRegistry.INSTANCE.register(INDUSTRIAL_OVEN, MultiblockMachineBER::new);
+        new Rei("industrial_oven", MIMachineRecipeTypes.INDUSTRIAL_OVEN, new ProgressBar.Parameters(77, 33, "arrow"))
+                .items(inputs -> inputs.addSlots(36, 35, 1, 2), outputs -> outputs.addSlot(102, 35))
+                .register();
+
+        MachineModels.addTieredMachine("industrial_press",
+                "industrial_press", MachineCasings.STEEL, true, false, false, true);
+        BlockEntityRendererRegistry.INSTANCE.register(INDUSTRIAL_PRESS, MultiblockMachineBER::new);
+        new Rei("industrial_press", MIMachineRecipeTypes.INDUSTRIAL_PRESS, new ProgressBar.Parameters(57, 33, "arrow"))
+                .items(inputs -> inputs.addSlots(36, 50, 2, 1), outputs -> outputs.addSlot(82, 50))
+                .fluids(inputs -> {}, outputs -> outputs.addSlot(82, 30))
+                .register();
+
+        MachineModels.addTieredMachine("tree_planter",
+                "tree_planter", MachineCasings.STEEL, true, false, false, true);
+        BlockEntityRendererRegistry.INSTANCE.register(TREE_PLANTER, MultiblockMachineBER::new);
+        new Rei("tree_planter", MIMachineRecipeTypes.TREE_PLANTER, new ProgressBar.Parameters(68, 53, "arrow"))
+                .items(inputs -> inputs.addSlots(30, 40, 1, 2),
+                        outputs -> outputs.addSlots(95, 20, 3, 2))
+                .fluids(inputs -> inputs.addSlots(30, 60, 1, 2),
+                        outputs -> outputs.addSlots(95, 80, 1, 2))
+                .register();
     }
 
     private static final Rectangle CRAFTING_GUI = new Rectangle(CraftingMultiblockGui.X, CraftingMultiblockGui.Y,

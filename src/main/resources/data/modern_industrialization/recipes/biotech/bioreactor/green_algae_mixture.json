@@ -4,11 +4,11 @@
   "duration": 3000,
   "item_inputs": [
     {
-      "item": "modern_industrialization:green_algae",
+      "item": "modern_industrialization:sample_green_algae",
       "amount": 1
-    }.
+    },
     {
-      "tags": "c:fertilizers",
+      "tag": "c:fertilizers",
       "amount": 1
     }
   ],

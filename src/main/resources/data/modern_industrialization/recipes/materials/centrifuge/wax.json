@@ -1,0 +1,21 @@
+{
+  "type": "modern_industrialization:centrifuge",
+  "eu": 4,
+  "duration": 400,
+  "fluid_inputs": {
+    "fluid": "modern_industrialization:slack_oil",
+    "amount": 100
+  },
+  "item_output": [
+    {
+      "item": "modern_industrialization:wax",
+      "amount": 1
+    }
+  ],
+  "fluid_outputs": [
+    {
+      "fluid": "modern_industrialization:lubricant",
+      "amount": 100
+    }
+  ]
+}

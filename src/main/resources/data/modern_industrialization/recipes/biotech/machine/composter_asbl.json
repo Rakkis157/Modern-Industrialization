@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrr",
+    "rcr",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "modern_industrialization:rubber_block"
+    },
+    "c": {
+      "item": "modern_industrialization:steel_machine_casing"
+    }
+  },
+  "result": {
+    "item": "modern_industrialization:composter",
+    "count": 1
+  }
+}

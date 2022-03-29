@@ -1,0 +1,17 @@
+{
+  "type": "modern_industrialization:industrial_press",
+  "eu": 4,
+  "duration": 400,
+  "item_inputs": [
+    {
+      "item": "modern_industrialization:sunflower_seeds",
+      "amount": 16
+    }
+  ],
+  "item_outputs": [
+    {
+      "item": "modern_industrialization:sunflower_seeds",
+      "amount": 16
+    }
+  ]
+}

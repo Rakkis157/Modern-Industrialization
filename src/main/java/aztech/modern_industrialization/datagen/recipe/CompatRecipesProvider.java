@@ -58,6 +58,9 @@ public class CompatRecipesProvider extends MIRecipesProvider {
 
         this.currentCompatModid = "indrev";
         generateIndrevCompat();
+
+        this.currentCompatModid = "farmersdelight";
+        generateFarmersDelightCompat();
     }
 
     private void generateTrCompat() {
@@ -154,6 +157,15 @@ public class CompatRecipesProvider extends MIRecipesProvider {
             }
         }
     }
+
+    private void generateFarmersDelightCompat(){
+        addMiRecipe(MIMachineRecipeTypes.COMPRESSOR, "#c:straws", "farmersdelight:canvas", 1);
+        addCompatRecipe("tatami", MIRecipeJson.create(MIMachineRecipeTypes.PACKER, 2, 200)
+                .addItemInput("farmersdelight:canvas", 2)
+                .addItemInput("#c:straws", 2)
+                .addItemOutput("farmersdelight:tatami", 1));
+    }
+
 
     private void addMiRecipe(MachineRecipeType machine, String input, String output, int outputAmount) {
         addMiRecipe(machine, input, output, outputAmount, 2, 200);
