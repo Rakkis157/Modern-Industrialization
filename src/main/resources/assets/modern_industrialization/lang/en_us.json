@@ -483,6 +483,7 @@
     "block.modern_industrialization.yttrium_block": " Block of Yttrium",
     "book.modern_industrialization.landing_text": "Welcome to Modern Industrialization! To get started, be sure to collect a lot of Copper Ore and Tin Ore.",
     "book.modern_industrialization.subtitle": "Technology For Newbies",
+    "entity.minecraft.villager.engineer": "Engineer",
     "item.modern_industrialization.MOX_crushed_dust": "Mox Crushed Dust",
     "item.modern_industrialization.MOX_dust": "Mox Dust",
     "item.modern_industrialization.MOX_ingot": "Mox Ingot",
