@@ -7,6 +7,7 @@ public class Mushroom {
     private static final String ITEM = "\"item.modern_industrialization.";
 
     public static void main(String []args){
+        System.out.println("Generating code for lang/en_us.json");
         for (int i = 0; i < MIMushroom.MUSHROOM.length; i++){
             printMushroom(MIMushroom.MUSHROOM[i].getName());
         }

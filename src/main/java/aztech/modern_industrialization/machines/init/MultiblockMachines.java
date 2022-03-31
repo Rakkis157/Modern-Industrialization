@@ -68,7 +68,7 @@ public class MultiblockMachines {
     public static BlockEntityType HIGH_PRESSURE_LARGE_STEAM_BOILER;
     public static BlockEntityType HIGH_PRESSURE_ADVANCED_LARGE_STEAM_BOILER;
     public static BlockEntityType ELECTRIC_QUARRY;
-    public static BlockEntityType OIL_DRILLING_RIG;
+    public static BlockEntityType DRILLING_RIG;
     public static BlockEntityType VACUUM_FREEZER;
     public static BlockEntityType DISTILLATION_TOWER;
     public static BlockEntityType LARGE_DIESEL_GENERATOR;
@@ -306,49 +306,49 @@ public class MultiblockMachines {
         ReiMachineRecipes.registerMultiblockShape("electric_quarry", quarryElectricShape);
     }
 
-    private static void oilDrillingRig() {
-        ShapeTemplate.Builder oilDrillingRigShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STEEL);
+    private static void drillingRig() {
+        ShapeTemplate.Builder drillingRigShapeBuilder = new ShapeTemplate.Builder(MachineCasings.STEEL);
         SimpleMember chain = SimpleMember.verticalChain();
         HatchFlags hatchFlags = new HatchFlags.Builder().with(ITEM_INPUT).with(FLUID_OUTPUT).with(ENERGY_INPUT).build();
         // pillars
         for (int y = -4; y <= -2; ++y) {
-            oilDrillingRigShapeBuilder.add(-2, y, -1, steelCasing, null);
-            oilDrillingRigShapeBuilder.add(2, y, -1, steelCasing, null);
-            oilDrillingRigShapeBuilder.add(-2, y, 3, steelCasing, null);
-            oilDrillingRigShapeBuilder.add(2, y, 3, steelCasing, null);
+            drillingRigShapeBuilder.add(-2, y, -1, steelCasing, null);
+            drillingRigShapeBuilder.add(2, y, -1, steelCasing, null);
+            drillingRigShapeBuilder.add(-2, y, 3, steelCasing, null);
+            drillingRigShapeBuilder.add(2, y, 3, steelCasing, null);
         }
         // platform
         for (int x = -2; x <= 2; ++x) {
             for (int z = -1; z <= 3; ++z) {
                 if (x == 2 || x == -2 || z == -1 || z == 3) {
-                    oilDrillingRigShapeBuilder.add(x, -1, z, steelCasing, null);
+                    drillingRigShapeBuilder.add(x, -1, z, steelCasing, null);
                 }
             }
         }
         // chains and pipe casings
         for (int y = -4; y <= 4; ++y) {
-            oilDrillingRigShapeBuilder.add(-1, y, 1, chain, null);
-            oilDrillingRigShapeBuilder.add(1, y, 1, chain, null);
+            drillingRigShapeBuilder.add(-1, y, 1, chain, null);
+            drillingRigShapeBuilder.add(1, y, 1, chain, null);
             if (y >= -1) {
-                oilDrillingRigShapeBuilder.add(0, y, 1, steelPipe, null);
+                drillingRigShapeBuilder.add(0, y, 1, steelPipe, null);
             }
         }
         // top
         for (int x = -2; x <= 2; ++x) {
-            oilDrillingRigShapeBuilder.add(x, 5, 1, steelCasing, null);
+            drillingRigShapeBuilder.add(x, 5, 1, steelCasing, null);
         }
         // hatches
-        oilDrillingRigShapeBuilder.add(-1, 0, 0, steelCasing, hatchFlags);
-        oilDrillingRigShapeBuilder.add(1, 0, 0, steelCasing, hatchFlags);
-        oilDrillingRigShapeBuilder.add(-1, 0, 2, steelCasing, hatchFlags);
-        oilDrillingRigShapeBuilder.add(0, 0, 2, steelCasing, hatchFlags);
-        oilDrillingRigShapeBuilder.add(1, 0, 2, steelCasing, hatchFlags);
+        drillingRigShapeBuilder.add(-1, 0, 0, steelCasing, hatchFlags);
+        drillingRigShapeBuilder.add(1, 0, 0, steelCasing, hatchFlags);
+        drillingRigShapeBuilder.add(-1, 0, 2, steelCasing, hatchFlags);
+        drillingRigShapeBuilder.add(0, 0, 2, steelCasing, hatchFlags);
+        drillingRigShapeBuilder.add(1, 0, 2, steelCasing, hatchFlags);
 
-        ShapeTemplate oilDrillingRigShape = oilDrillingRigShapeBuilder.build();
+        ShapeTemplate drillingRigShape = drillingRigShapeBuilder.build();
 
-        OIL_DRILLING_RIG = MachineRegistrationHelper.registerMachine("oil_drilling_rig", bet -> new ElectricCraftingMultiblockBlockEntity(bet,
-                "oil_drilling_rig", oilDrillingRigShape, MIMachineRecipeTypes.OIL_DRILLING_RIG));
-        ReiMachineRecipes.registerMultiblockShape("oil_drilling_rig", oilDrillingRigShape);
+        DRILLING_RIG = MachineRegistrationHelper.registerMachine("drilling_rig", bet -> new ElectricCraftingMultiblockBlockEntity(bet,
+                "drilling_rig", drillingRigShape, MIMachineRecipeTypes.DRILLING_RIG));
+        ReiMachineRecipes.registerMultiblockShape("drilling_rig", drillingRigShape);
     }
 
     private static void vacuumFreezer() {
@@ -911,7 +911,7 @@ public class MultiblockMachines {
         electricBlastFurnace();
         steamBoilers();
         quarries();
-        oilDrillingRig();
+        drillingRig();
         vacuumFreezer();
         distillationTower();
         largeDieselGenerator();
@@ -989,9 +989,9 @@ public class MultiblockMachines {
                 .fluids(inputs -> inputs.addSlots(36, 35, 2, 1), outputs -> outputs.addSlot(122, 35))
                 .register();
 
-        MachineModels.addTieredMachine("oil_drilling_rig", "oil_drilling_rig", MachineCasings.STEEL, true, false, false);
-        BlockEntityRendererRegistry.INSTANCE.register(OIL_DRILLING_RIG, MultiblockMachineBER::new);
-        new Rei("oil_drilling_rig", MIMachineRecipeTypes.OIL_DRILLING_RIG, new ProgressBar.Parameters(77, 33, "arrow"))
+        MachineModels.addTieredMachine("drilling_rig", "drilling_rig", MachineCasings.STEEL, true, false, false);
+        BlockEntityRendererRegistry.INSTANCE.register(DRILLING_RIG, MultiblockMachineBER::new);
+        new Rei("drilling_rig", MIMachineRecipeTypes.DRILLING_RIG, new ProgressBar.Parameters(77, 33, "arrow"))
                 .items(inputs -> inputs.addSlot(36, 35), outputs -> {
                 })
                 .fluids(inputs -> {

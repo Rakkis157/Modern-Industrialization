@@ -443,7 +443,8 @@ public class MIMaterials {
         MaterialRegistry.addMaterial(
                 new MaterialBuilder("tungsten", METALLIC, new BakableTargetColoramp(0x8760ad, common("ingot"), template("tungsten_ingot")), VERY_HARD)
                         .addParts(RAW_METAL.ofAll(MaterialRawSet.COPPER))
-                        .addParts(TINY_DUST, DUST, PLATE, INGOT, NUGGET, LARGE_PLATE, DOUBLE_INGOT, ROD)
+                        .addParts(TINY_DUST, DUST, PLATE, INGOT, NUGGET, LARGE_PLATE, DOUBLE_INGOT, RING, ROD, GEAR)
+                        .addParts(DRILL_HEAD, DRILL)
                         .addParts(BLOCK.of(MaterialBlockSet.NETHERITE)).addParts(ORE.ofAll(6, 5, 20, MaterialOreSet.IRON))
                         .addRecipes(StandardRecipes::apply).build());
 

@@ -14,6 +14,8 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.Consumer;
 
+import static aztech.modern_industrialization.util.string.RS.clean;
+
 public class FoodRecipesProvider extends MIRecipesProvider{
     private Consumer<FinishedRecipe> consumer;
     public FoodRecipesProvider(FabricDataGenerator dataGenerator){
@@ -44,8 +46,8 @@ public class FoodRecipesProvider extends MIRecipesProvider{
     }
 
     private void addCookingRecipe(String input, String output, int cookingTime, double experience, String recipeType) {
-        String id = "%s_to_%s_%s".formatted(scrub(input), scrub(output), recipeType);
-        addCookingRecipe(id, scrub(input), SmeltingRecipeJson.create(input, output, cookingTime, experience, recipeType));
+        String id = "%s_to_%s_%s".formatted(clean(input), clean(output), recipeType);
+        addCookingRecipe(id, clean(input), SmeltingRecipeJson.create(input, output, cookingTime, experience, recipeType));
     }
 
     private void addCookingRecipe(String id, String foodType, RecipeJson<?> recipeJson){
@@ -53,7 +55,7 @@ public class FoodRecipesProvider extends MIRecipesProvider{
     }
 
     private void addPressRecipe(Item input, Item output, Fluid fluid){
-        String id = scrub(getItemName(input));
+        String id = clean(getItemName(input));
         addPressRecipe(id, MIRecipeJson.create(MIMachineRecipeTypes.INDUSTRIAL_PRESS, 2, 200)
                 .addItemInput(input, 4).addItemOutput(output, 4)
                 .addFluidOutput(fluid, 200));
@@ -68,7 +70,7 @@ public class FoodRecipesProvider extends MIRecipesProvider{
     }
 
     private void addThreshRecipe(Item input, Item output, int amount){
-        String id = "%s_to_%s".formatted(scrub(getItemName(input)), scrub(getItemName(output)));
+        String id = "%s_to_%s".formatted(clean(getItemName(input)), clean(getItemName(output)));
         addThreshRecipe(id, input, output, amount);
     }
 
@@ -79,11 +81,5 @@ public class FoodRecipesProvider extends MIRecipesProvider{
 
     private void addThreshRecipe(String id, RecipeJson<?> recipeJson) {
         recipeJson.offerTo(consumer, "biotech/centrifuge/" + id);
-    }
-
-    private String scrub(String string){
-        return string
-                .replace("modern_industrialization:", "")
-                .replace("minecraft:", "");
     }
 }

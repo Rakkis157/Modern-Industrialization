@@ -44,6 +44,7 @@ import aztech.modern_industrialization.pipes.MIPipes;
 import java.util.Map;
 
 import aztech.modern_industrialization.villagers.MIProfession;
+import aztech.modern_industrialization.villagers.MITrades;
 import me.shedaniel.cloth.api.common.events.v1.PlayerChangeWorldCallback;
 import me.shedaniel.cloth.api.common.events.v1.PlayerLeaveCallback;
 import net.devtech.arrp.api.RRPCallback;
@@ -123,7 +124,7 @@ public class ModernIndustrialization implements ModInitializer {
         setupBlocks();
         MIBlockEntityTypes.init();
         MIFluids.setupFluids();
-        MIProfession.init();
+        MITrades.init();
 
         // fields.
         setupPackets();
