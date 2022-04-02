@@ -43,7 +43,6 @@ import aztech.modern_industrialization.nuclear.NuclearItem;
 import aztech.modern_industrialization.pipes.MIPipes;
 import java.util.Map;
 
-import aztech.modern_industrialization.villagers.MIProfession;
 import aztech.modern_industrialization.villagers.MITrades;
 import me.shedaniel.cloth.api.common.events.v1.PlayerChangeWorldCallback;
 import me.shedaniel.cloth.api.common.events.v1.PlayerLeaveCallback;
@@ -177,6 +176,10 @@ public class ModernIndustrialization implements ModInitializer {
         else if (id.contains("samples/")){
             path = "samples/";
             name = id.replace("samples/", "");
+        }
+        else if (id.contains("templates/")){
+            path = "templates/";
+            name = id.replace("templates/", "");
         }
         else{
             path = "";

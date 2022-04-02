@@ -110,6 +110,7 @@ public class MIFluids {
     public static final CraftingFluid BLUE_ALGAE_MIXTURE = new CraftingFluid("blue_algae_mixture", 0xff007374);
     public static final CraftingFluid BROWN_ALGAE_MIXTURE = new CraftingFluid("brown_algae_mixture", 0xff554500);
     public static final CraftingFluid GREEN_ALGAE_MIXTURE = new CraftingFluid("green_algae_mixture", 0xff006900);
+    public static final CraftingFluid POLYPROPYLENE = new CraftingFluid("polypropylene", 0xffc1e1e0);
     public static final CraftingFluid SALT_WATER_= new CraftingFluid("salt_water", 0xffc1d0bf);
     public static final CraftingFluid SLACK_OIL= new CraftingFluid("slack_oil", 0xff939315);
     public static final CraftingFluid YEAST_MIXTURE = new CraftingFluid("yeast_mixture", 0xfffcf696);

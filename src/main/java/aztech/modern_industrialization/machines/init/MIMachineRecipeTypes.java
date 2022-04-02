@@ -73,6 +73,7 @@ public class MIMachineRecipeTypes {
     public static final MachineRecipeType COMBUSTION_CHAMBER = create("combustion_chamber").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
     public static final MachineRecipeType DEHYDRATOR = create("dehydrator").withItemInputs().withItemOutputs().withFluidInputs();
     public static final MachineRecipeType EXTRACTOR = create("extractor").withItemInputs().withItemOutputs().withFluidOutputs();
+    public static final MachineRecipeType EXTRUDER = create("extruder").withFluidInputs().withItemOutputs();
     public static final MachineRecipeType FILTER = create("filter").withItemInputs().withFluidInputs().withItemOutputs().withFluidOutputs();
     public static final MachineRecipeType SAMPLING_MACHINE = create("sampling_machine").withItemInputs().withFluidInputs().withItemOutputs();
 

@@ -166,7 +166,6 @@ public class CompatRecipesProvider extends MIRecipesProvider {
                 .addItemOutput("farmersdelight:tatami", 1));
     }
 
-
     private void addMiRecipe(MachineRecipeType machine, String input, String output, int outputAmount) {
         addMiRecipe(machine, input, output, outputAmount, 2, 200);
     }

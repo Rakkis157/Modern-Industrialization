@@ -114,7 +114,7 @@ public interface ItemContainingItemHelper {
     }
 
     default boolean handleOtherStackedOnMe(ItemStack stackBarrel, ItemStack itemStack, Slot slot, ClickAction clickType, Player player,
-            SlotAccess cursorStackReference) {
+                                           SlotAccess cursorStackReference) {
         if (clickType == ClickAction.SECONDARY && slot.allowModification(player)) {
             Mutable<ItemStack> ref = new MutableObject<>(itemStack);
             boolean result = handleClick(stackBarrel, ref);

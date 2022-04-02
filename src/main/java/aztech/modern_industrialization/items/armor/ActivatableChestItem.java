@@ -1,3 +1,5 @@
+package aztech.modern_industrialization.items.armor;
+
 /*
  * MIT License
  *
@@ -21,7 +23,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package aztech.modern_industrialization.items.armor;
 
 import net.minecraft.world.item.ItemStack;
 
@@ -34,3 +35,4 @@ public interface ActivatableChestItem {
         stack.getOrCreateTag().putBoolean("activated", activated);
     }
 }
+

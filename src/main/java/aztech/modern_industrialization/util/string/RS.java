@@ -38,4 +38,8 @@ public class RS {
     public static String isMC(String string){
         return "minecraft:" + string;
     }
+
+    public static String recipeID(String input, String output){
+        return "%s_to_%s".formatted(RS.clean(input), RS.clean(output));
+    }
 }

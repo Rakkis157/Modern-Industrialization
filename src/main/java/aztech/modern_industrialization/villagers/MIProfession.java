@@ -16,7 +16,7 @@ public class MIProfession {
         return VillagerProfession.register(id, POI, soundEvent);
     }
 
-    public static final VillagerProfession ENGINEER = of("engineer", MIBlock.FORGE_HAMMER ,SoundEvents.VILLAGER_WORK_TOOLSMITH);
     public static final VillagerProfession MARINE_BIOLOGIST = of("marine_biologist", MIBlock.AQUARIUM, SoundEvents.VILLAGER_WORK_FISHERMAN);
+    public static final VillagerProfession MECHANICAL_ENGINEER = of("mechanical_engineer", MIBlock.FORGE_HAMMER ,SoundEvents.VILLAGER_WORK_TOOLSMITH);
     public static final VillagerProfession MYCOLOGIST = of("mycologist", Blocks.MUSHROOM_STEM, SoundEvents.VILLAGER_WORK_FARMER);
 }

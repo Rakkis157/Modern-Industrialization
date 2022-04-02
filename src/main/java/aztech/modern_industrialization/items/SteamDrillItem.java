@@ -249,7 +249,7 @@ public class SteamDrillItem extends Item implements DynamicAttributeTool, MagnaT
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stackBarrel, ItemStack itemStack, Slot slot, ClickAction clickType, Player player,
-            SlotAccess cursorStackReference) {
+                                            SlotAccess cursorStackReference) {
         return handleOtherStackedOnMe(stackBarrel, itemStack, slot, clickType, player, cursorStackReference);
     }
 

@@ -36,7 +36,7 @@ public class MITrades {
                 new VillagerTrades.EnchantedItemForEmeralds(MIItem.NETHERITE_HAMMER, 24, 8, 60),
                 new VillagerTrades.EmeraldForItems(MIItem.ITEM_ELECTRONIC_CIRCUIT, 1, 8, 34)
         };
-        VillagerTrades.TRADES.put(MIProfession.ENGINEER, toIntMap(ImmutableMap.of(1, engineerLevel1, 2, engineerLevel2,
+        VillagerTrades.TRADES.put(MIProfession.MECHANICAL_ENGINEER, toIntMap(ImmutableMap.of(1, engineerLevel1, 2, engineerLevel2,
                 3, engineerLevel3, 4, engineerLevel4, 5, engineerLevel5)));
         //</editor-fold>
 

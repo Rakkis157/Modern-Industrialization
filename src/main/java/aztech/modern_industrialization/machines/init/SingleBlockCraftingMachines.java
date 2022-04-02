@@ -82,6 +82,13 @@ public final class SingleBlockCraftingMachines {
                 TIER_ELECTRIC, 16
         );
         registerMachineTiers(
+                "extruder", MIMachineRecipeTypes.EXTRUDER, 1, 1, 1, 0, guiParams -> {},
+                new ProgressBar.Parameters(88, 31, "wiremill"), new RecipeEfficiencyBar.Parameters(38, 62), new EnergyBar.Parameters(15, 34),
+                items -> items.addSlot(60, 35).addSlot(120, 35), fluids -> fluids.addSlot(40, 35),
+                true, false, false,
+                TIER_ELECTRIC, 16
+        );
+        registerMachineTiers(
                 "filter", MIMachineRecipeTypes.FILTER, 1, 4, 1, 2, guiParams -> {},
                 new ProgressBar.Parameters(77, 33, "macerate"), new RecipeEfficiencyBar.Parameters(38, 66), new EnergyBar.Parameters(8, 34),
                 items -> items.addSlot(36, 47).addSlots(102, 27, 2, 2), fluids -> fluids.addSlot(56, 47).addSlots(142,27, 2, 1),

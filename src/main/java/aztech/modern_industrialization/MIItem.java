@@ -24,7 +24,10 @@
 package aztech.modern_industrialization;
 
 import aztech.modern_industrialization.api.pipes.item.SpeedUpgrade;
-import aztech.modern_industrialization.items.*;
+import aztech.modern_industrialization.items.FluidFuelItemHelper;
+import aztech.modern_industrialization.items.ForgeTool;
+import aztech.modern_industrialization.items.GuideBookItem;
+import aztech.modern_industrialization.items.SteamDrillItem;
 import aztech.modern_industrialization.items.armor.GraviChestPlateItem;
 import aztech.modern_industrialization.items.armor.JetpackItem;
 import aztech.modern_industrialization.items.armor.QuantumArmorItem;
@@ -39,7 +42,10 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Tiers;
 
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -123,6 +129,9 @@ public final class MIItem {
     public static Item inMycology(String id) {
         return of("mycology/" + id);
     }
+    public static Item inTemplates(String id) {
+        return of("templates/" + id);
+    }
 
     public static Item ofGrainSpawn(String id) {
         return inMycology(id + "_grain_spawn");
@@ -144,6 +153,9 @@ public final class MIItem {
     }
     public static Item ofSample(String id) {
         return of("samples/sample_" + id);
+    }
+    public static Item ofTemplate(String id) {
+        return of("templates/" + id + "_template", 1, Rarity.RARE);
     }
 
     //<editor-fold desc="Base Items">
@@ -215,9 +227,6 @@ public final class MIItem {
     public static final Item MIXED_PLATE_NUCLEAR = of("mixed_plate_nuclear");
 
     public static final Item AIR_INTAKE = of("air_intake", 1);
-
-    public static final Item ITEM_PACKER_BLOCK_TEMPLATE = of("packer_block_template", 1, Rarity.RARE);
-    public static final Item ITEM_PACKER_DOUBLE_INGOT_TEMPLATE = of("packer_double_ingot_template", 1, Rarity.RARE);
 
     public static final Item ITEM_SCREWDRIVER = of("screwdriver", 1, true);
     public static final Item ITEM_WRENCH = of("wrench", 1, true);
@@ -444,5 +453,10 @@ public final class MIItem {
     public static final Item SAMPLE_YEAST = ofSample("yeast");
 
     //Templates
-    public static final Item ITEM_INDUSTRIAL_OVEN_LOAF_TEMPLATE = of("industrial_oven_loaf_template");
+    public static final Item BLANK_TEMPLATE = of("templates/blank_template");
+    public static final Item EXTRUDER_BAG_TEMPLATE = ofTemplate("extruder_bag");
+    public static final Item INDUSTRIAL_OVEN_BUN_TEMPLATE = ofTemplate("industrial_oven_bun");
+    public static final Item INDUSTRIAL_OVEN_LOAF_TEMPLATE = ofTemplate("industrial_oven_loaf");
+    public static final Item PACKER_BLOCK_TEMPLATE = ofTemplate("packer_block");
+    public static final Item PACKER_DOUBLE_INGOT_TEMPLATE = ofTemplate("packer_double_ingot");
 }

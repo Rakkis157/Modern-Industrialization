@@ -1,26 +1,33 @@
 package aztech.modern_industrialization.datagen.recipe;
 
+import aztech.modern_industrialization.MIFluids;
 import aztech.modern_industrialization.MIItem;
 import aztech.modern_industrialization.machines.init.MIMachineRecipeTypes;
 import aztech.modern_industrialization.recipe.json.MIRecipeJson;
 import aztech.modern_industrialization.recipe.json.RecipeJson;
-import aztech.modern_industrialization.util.string.RS;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.Consumer;
 
-public class PackUnpackRecipesProvider extends MIRecipesProvider{
+import static aztech.modern_industrialization.util.string.RS.*;
+
+public class IndustrialRecipesProvider extends MIRecipesProvider{
     private Consumer<FinishedRecipe> consumer;
 
-    public PackUnpackRecipesProvider(FabricDataGenerator dataGenerator){
+    public IndustrialRecipesProvider(FabricDataGenerator dataGenerator){
         super(dataGenerator);
     }
 
     @Override
     protected void generateRecipes(Consumer <FinishedRecipe> consumer){
         this.consumer = consumer;
+        //Extruder
+        addExtruder(MIFluids.POLYPROPYLENE, "extruder_bag", isMI("mushroom_grow_bag"));
+
+        //Packer - Unpacker
         addPacker("minecraft:amethyst_shard", "minecraft:amethyst_block", 4);
         addPacker("minecraft:brick", "minecraft:bricks", 4);
         addPacker("modern_industrialization:cellulose_fibres", "modern_industrialization:fibreboard", 4);
@@ -51,9 +58,16 @@ public class PackUnpackRecipesProvider extends MIRecipesProvider{
         addReversible("minecraft:wheat", "minecraft:hay_block", true);
     }
 
-    private String getRecipeID(String input, String output){
-        return "%s_to_%s".formatted(RS.clean(input), RS.clean(output));
+    private void addExtruder(Fluid fluid, String template, String output){
+        addExtruder(clean(output), MIRecipeJson.create(MIMachineRecipeTypes.CUTTING_MACHINE, 16, 100)
+                .addItemInput(isMI(template + "_template"), 1, 0.0)
+                .addFluidInput(fluid, 100).addItemOutput(output, 1));
     }
+
+    private void addExtruder(String id, RecipeJson<?> recipeJson){
+        recipeJson.offerTo(consumer, "cutting_machine/extrusion/" + id);
+    }
+
 
     private void addReversible(String input, String output){
         addReversible(input, output, 9);
@@ -86,16 +100,16 @@ public class PackUnpackRecipesProvider extends MIRecipesProvider{
 
     private void addPacker(String input, String output, int quantity, boolean template){
         if(template){
-            addPacker(input, output, quantity, MIItem.ITEM_PACKER_BLOCK_TEMPLATE);
+            addPacker(input, output, quantity, MIItem.PACKER_BLOCK_TEMPLATE);
         }
         else{
-            addPacker(getRecipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.PACKER, 2, 100)
+            addPacker(recipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.PACKER, 2, 100)
                     .addItemInput(input, quantity).addItemOutput(output, 1));
         }
     }
 
     private void addPacker(String input, String output, int quantity, Item templateItem){
-        addPacker(getRecipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.PACKER, 2, 100)
+        addPacker(recipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.PACKER, 2, 100)
                 .addItemInput(input.replace("mi:", "modern_industrialization:"), quantity)
                 .addItemInput(templateItem, 1, 0)
                 .addItemOutput(output.replace("mi:", "modern_industrialization:"), 1));
@@ -110,7 +124,7 @@ public class PackUnpackRecipesProvider extends MIRecipesProvider{
     }
 
     private void addUnpacker(String input, String output, int quantity){
-        addUnpacker(getRecipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.UNPACKER, 2, 100)
+        addUnpacker(recipeID(input, output), MIRecipeJson.create(MIMachineRecipeTypes.UNPACKER, 2, 100)
                 .addItemInput(input.replace("mi:", "modern_industrialization:"), 1)
                 .addItemOutput(output.replace("mi:", "modern_industrialization:"), quantity));
     }
