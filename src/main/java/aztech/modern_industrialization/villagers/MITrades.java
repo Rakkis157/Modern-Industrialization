@@ -100,7 +100,6 @@ public class MITrades {
                 new VillagerTrades.ItemsForEmeralds(MIItem.PORTABELLA_MUSHROOM_SPORE_SAMPLE, 6, 1, 8, 8),
                 new VillagerTrades.ItemsForEmeralds(MIItem.SPLITGILL_MUSHROOM_SPORE_SAMPLE, 6, 1, 8, 8),
                 new VillagerTrades.ItemsForEmeralds(MIItem.SNOW_MUSHROOM_SPORE_SAMPLE, 6, 1, 8, 8),
-                new VillagerTrades.EmeraldForItems(MIItem.STERILIZED_GRAIN, 3, 8, 8)
         };
         VillagerTrades.ItemListing[] mycologistLevel3 = new VillagerTrades.ItemListing[]{
                 new VillagerTrades.ItemsForEmeralds(MIItem.ENOKITAKE_MUSHROOM_SPORE_SAMPLE, 6, 1, 8, 12),

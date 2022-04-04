@@ -80,6 +80,7 @@ public class MIMachineRecipeTypes {
     //Biotech Multi block
     public static final MachineRecipeType AQUACULTURE_POND = create("aquaculture_pond").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
     public static final MachineRecipeType COMPOSTER = create("composter").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
+    public static final MachineRecipeType CROP_PLANTER = create("crop_planter").withItemInputs().withItemOutputs().withFluidInputs().withFluidOutputs();
     public static final MachineRecipeType GROWTH_CHAMBER = create("growth_chamber").withItemInputs().withItemOutputs().withFluidInputs();
     public static final MachineRecipeType INDUSTRIAL_OVEN = create("industrial_oven").withItemInputs().withItemOutputs();
     public static final MachineRecipeType INDUSTRIAL_PRESS = create("industrial_press").withItemInputs().withItemOutputs().withFluidOutputs();

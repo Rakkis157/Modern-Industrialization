@@ -41,7 +41,7 @@ public class Mushroom {
 
     public RecipeJson getBagRecipe(){
         return MIRecipeJson.create(MIMachineRecipeTypes.MIXER, 2, 200)
-                .addItemInput(grainSpawn, 1).addItemInput(MIItem.GROW_BAG, 2)
+                .addItemInput(sample, 1).addItemInput(MIItem.GROW_BAG, 2)
                 .addItemInput(substrate, 1).addItemOutput(growBag, 2);
     }
 
@@ -55,12 +55,6 @@ public class Mushroom {
         return MIRecipeJson.create(MIMachineRecipeTypes.SAMPLING_MACHINE, 2, 200)
                 .addItemInput(mushroom, 1).addItemInput(MIItem.TEST_TUBE, 1)
                 .addItemOutput(sample, 1);
-    }
-
-    public RecipeJson getSpawnRecipe(){
-        return MIRecipeJson.create(MIMachineRecipeTypes.MIXER, 2, 200)
-                .addItemInput(sample, 1).addItemInput(RS.isMI("sterilized_grain"), 1)
-                .addItemOutput(grainSpawn, 1);
     }
 
     public String getName(){

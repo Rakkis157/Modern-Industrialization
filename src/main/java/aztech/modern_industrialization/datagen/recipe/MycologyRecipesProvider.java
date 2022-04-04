@@ -37,7 +37,6 @@ public class MycologyRecipesProvider  extends MIRecipesProvider{
         String id = mushroom.getName();
         addMycologyRecipe("mixer/" + id + "_grow_bag", mushroom.getBagRecipe());
         addMycologyRecipe("growth_chamber/" + id, mushroom.getGrowingRecipe());
-        addMycologyRecipe("mixer/" + id + "_grain_spawn", mushroom.getSpawnRecipe());
         addMycologyRecipe("sampling_machine/sample_" + id, mushroom.getSampleRecipe());
     }
 

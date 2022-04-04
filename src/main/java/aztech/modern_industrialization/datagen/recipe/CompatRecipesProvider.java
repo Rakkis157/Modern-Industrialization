@@ -38,6 +38,8 @@ import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.level.material.Fluids;
 
+import static aztech.modern_industrialization.util.string.RS.isMC;
+
 public class CompatRecipesProvider extends MIRecipesProvider {
     private Consumer<FinishedRecipe> consumer;
     private String currentCompatModid;
@@ -61,6 +63,10 @@ public class CompatRecipesProvider extends MIRecipesProvider {
 
         this.currentCompatModid = "farmersdelight";
         generateFarmersDelightCompat();
+
+        this.currentCompatModid = "croptopia";
+        generateCroptopiaCompat();
+
     }
 
     private void generateTrCompat() {
@@ -166,6 +172,50 @@ public class CompatRecipesProvider extends MIRecipesProvider {
                 .addItemOutput("farmersdelight:tatami", 1));
     }
 
+    private void generateCroptopiaCompat(){
+        String[] saplings = {"almond", "apple", "apricot", "avocado", "banana", "cashew", "cherry", "coconut",
+                "date", "dragonfruit", "fig", "grapefruit", "kumquat", "lemon", "lime", "mango", "nectarine",
+                "nutmeg", "orange", "peach", "pear", "pecan", "persimmon", "plum", "starfruit", "walnut"};
+
+        String[] crops = {"artichoke", "asparagus", "barley", "basil", "bellpepper", "blackbean", "blackberry",
+                "blueberry", "broccoli", "cabbage", "cantaloupe", "cauliflower", "celery", "chile_pepper", "coffee",
+                "corn", "cranberry", "cucumber", "currant", "eggplant", "elderberry", "garlic", "ginger", "grape",
+                "greenbean", "greenonion", "honeydew", "hops", "kale", "kiwi", "leek", "lettuce", "mustard", "oat",
+                "olive", "peanut", "pineapple", "radish", "raspberry", "rhubarb", "rutabaga", "saguaro", "soybean",
+                "spinach", "squash", "strawberry", "sweetpotato", "tomatillo", "tomato", "turmeric", "turnip", "yam",
+                "zucchini"};
+
+        for (int i = 0; i < saplings.length; i++){
+            addCroptopiaFruitRecipes(saplings[i]);
+        }
+
+        for (int i = 0; i < crops.length; i++){
+            addCroptopiaCropRecipes(crops[i]);
+        }
+    }
+
+    private void addCroptopiaCropRecipes(String id){
+        String seed = isCompat(id + "_seed");
+        String crop = isCompat(id);
+        addCompatRecipe("crop_planter/" + id, MIRecipeJson.create(MIMachineRecipeTypes.CROP_PLANTER, 2, 800)
+                .addItemInput(seed, 24).addItemOutput(crop, 48).addItemOutput(seed, 24)
+                .addItemInput("#c:fertilizers", 24).addFluidInput(Fluids.WATER, 12000));
+    }
+
+    private void addCroptopiaFruitRecipes(String id){
+        String fruit;
+        if (id.equals("apple")){
+            fruit = isMC(id);
+        }
+        else {
+            fruit = isCompat(id);
+        }
+        String sapling = isCompat(id + "_sapling");
+        addCompatRecipe("tree_planter/" + id, MIRecipeJson.create(MIMachineRecipeTypes.TREE_PLANTER, 2, 800)
+                .addItemInput(sapling, 4, 0).addItemOutput(fruit, 16).addItemOutput(sapling, 6, 0.75)
+                .addItemInput("#c:fertilizers", 8).addFluidInput(Fluids.WATER, 8000));
+    }
+
     private void addMiRecipe(MachineRecipeType machine, String input, String output, int outputAmount) {
         addMiRecipe(machine, input, output, outputAmount, 2, 200);
     }
@@ -178,5 +228,9 @@ public class CompatRecipesProvider extends MIRecipesProvider {
     private void addCompatRecipe(String id, RecipeJson<?> recipeJson) {
         id = "compat/%s/%s".formatted(currentCompatModid, id);
         recipeJson.offerTo(withConditions(consumer, DefaultResourceConditions.allModsLoaded(currentCompatModid)), id);
+    }
+
+    private String isCompat(String string){
+        return currentCompatModid + ":" + string;
     }
 }

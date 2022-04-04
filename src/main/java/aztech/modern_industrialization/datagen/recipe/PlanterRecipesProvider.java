@@ -12,6 +12,8 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.function.Consumer;
 
+import static aztech.modern_industrialization.util.string.RS.*;
+
 public class PlanterRecipesProvider extends MIRecipesProvider{
     private Consumer<FinishedRecipe> consumer;
     public PlanterRecipesProvider(FabricDataGenerator dataGenerator){
@@ -22,12 +24,20 @@ public class PlanterRecipesProvider extends MIRecipesProvider{
     protected void generateRecipes(Consumer<FinishedRecipe> consumer){
         this.consumer = consumer;
 
+        //Crop Planter
+        addCrop(isMC("beetroot"), isMC("beetroot_seeds"));
+        addCrop(isMC("carrot"));
+        addBlockCrop(isMC("melon"), isMC("melon_seeds"));
+        addCrop(isMC("potato"));
+        addBlockCrop(isMC("pumpkin"), isMC("pumpkin_seeds"));
+        addCrop(isMC("sunflower"), isMI("sunflower_seeds"));
+        addCrop(isMC("wheat"), isMC("wheat_seeds"));
+
+        //Tree Planter
         addFungusRecipe("crimson");
         addFungusRecipe("warped");
-
         addMushroomRecipe("brown_mushroom");
         addMushroomRecipe("red_mushroom");
-
         addTreeRecipe("acacia");
         addTreeRecipe("birch");
         addTreeRecipe("dark_oak");
@@ -38,6 +48,28 @@ public class PlanterRecipesProvider extends MIRecipesProvider{
                 "minecraft:azalea_leaves");
         addTreeRecipe("flowering_azalea", "minecraft:flowering_azalea", "minecraft:oak_log",
                 "minecraft:flowering_azalea_leaves");
+    }
+
+    private void addCrop(String crop){
+        addCrop(crop, crop);
+    }
+
+    private void addCrop(String crop, String seed){
+        String recipeID = recipeID(clean(seed), clean(crop));
+        addCropPlanterRecipe(recipeID, MIRecipeJson.create(MIMachineRecipeTypes.CROP_PLANTER, 2, 800)
+                .addItemInput(seed, 24).addItemInput("#c:fertilizers", 8)
+                .addItemOutput(crop, 60).addFluidInput(Fluids.WATER, 8000));
+    }
+
+    private void addBlockCrop(String crop, String seed){
+        String recipeID = recipeID(clean(seed), clean(crop));
+        addCropPlanterRecipe(recipeID, MIRecipeJson.create(MIMachineRecipeTypes.CROP_PLANTER, 2, 800)
+                .addItemInput(seed, 12).addItemInput("#c:fertilizers", 6)
+                .addItemOutput(crop, 12).addFluidInput(Fluids.WATER, 8000));
+    }
+
+    private void addCropPlanterRecipe(String id, RecipeJson<?> recipeJson){
+        recipeJson.offerTo(consumer, "crop_planter" + id);
     }
 
     private void addFungusRecipe(String id){

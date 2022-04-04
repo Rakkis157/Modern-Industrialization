@@ -4,7 +4,7 @@ public class MIMushroom {
 
     private static final int REGULAR = 0;
     private static final int NETHER = 1;
-    private static final int ARCANE = 1;
+    private static final int ARCANE = 2;
 
 
     private static Mushroom of(String name){
@@ -31,8 +31,8 @@ public class MIMushroom {
     public static final Mushroom SPLITGILL_MUSHROOM = of("splitgill");
     public static final Mushroom STRAW_MUSHROOM = of("straw");
 
-    public static Mushroom[] MUSHROOM = {BAMBOO_MUSHROOM, BEECH_MUSHROOM, BROWN_MUSHROOM, BUTTON_MUSHROOM, ENOKITAKE_MUSHROOM,
-            MAITAKE_MUSHROOM, OYSTER_MUSHROOM, PORTABELLA_MUSHROOM, RED_MUSHROOM, ROPE_MUSHROOM, SHIITAKE_MUSHROOM, SNOW_MUSHROOM,
-            SPLITGILL_MUSHROOM, STRAW_MUSHROOM};
+    public static Mushroom[] MUSHROOM = {BAMBOO_MUSHROOM, BEECH_MUSHROOM, BROWN_MUSHROOM, BUTTON_MUSHROOM,
+            ENOKITAKE_MUSHROOM, MAITAKE_MUSHROOM, OYSTER_MUSHROOM, PORTABELLA_MUSHROOM, RED_MUSHROOM,
+            ROPE_MUSHROOM, SHIITAKE_MUSHROOM, SNOW_MUSHROOM, SPLITGILL_MUSHROOM, STRAW_MUSHROOM};
 
 }

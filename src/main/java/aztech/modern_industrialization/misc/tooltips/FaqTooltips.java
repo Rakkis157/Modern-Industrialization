@@ -54,7 +54,7 @@ public class FaqTooltips {
     }
 
     static {
-        add("aquarium", 1);
+        add("aquaculture_pond", 1);
         add("forge_hammer", 2);
         add("kanthal_coil", 2);
         add("stainless_steel_dust", 1);

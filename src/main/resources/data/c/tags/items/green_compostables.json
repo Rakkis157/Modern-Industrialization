@@ -5,6 +5,7 @@
     "minecraft:kelp",
     "#minecraft:flowers",
     "modern_industrialization:cellulose_fibres",
-    "modern_industrialization:crushed_leaves"
+    "modern_industrialization:crushed_leaves",
+    "modern_industrialization:fish_meal"
   ]
 }
